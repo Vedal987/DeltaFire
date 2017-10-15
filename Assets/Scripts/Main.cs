@@ -48,6 +48,7 @@ public class Main : MonoBehaviour {
 		shootTimer -= Time.deltaTime;
 		if (Input.GetKey (KeyCode.LeftShift)) {
 			running = true;
+			cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
 			if (scoped) {
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
@@ -57,6 +58,7 @@ public class Main : MonoBehaviour {
 		} else {
 			running = false;
 			pivot.GetComponent<Animator> ().SetBool ("Running", false);
+			cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
 		}
 		if (!reloading && !running) {
 			if (Input.GetButtonDown ("Fire2")) {
@@ -122,7 +124,7 @@ public class Main : MonoBehaviour {
 
 	public IEnumerator Shoot()
 	{
-		pivot.GetComponent<ShakeCamera> ().GunShake ();
+		cam.transform.parent.GetComponent<ShakeCamera> ().GunShake ();
 		int ran = Random.Range (0, shoot.Length - 1);
 		gunAnim.SetTrigger ("Fire");
 		yield return new WaitForSeconds (0.02f);
