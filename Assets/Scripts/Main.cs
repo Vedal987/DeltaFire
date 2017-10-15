@@ -19,7 +19,7 @@ public class Main : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ad = this.GetComponent<AudioSource> ();
+		ad = gun.GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
