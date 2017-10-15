@@ -106,8 +106,8 @@ MonoBehaviour:
         radius: 4
         antiFlicker: 0
       lensDirt:
-        texture: {fileID: 2800000, guid: 7a051dbda2d7bc447bee412427cd311e, type: 3}
-        intensity: 1.4
+        texture: {fileID: 2800000, guid: 69e847bbff1cf5449a4ee0bbd045dbc9, type: 3}
+        intensity: 1
   colorGrading:
     m_Enabled: 1
     m_Settings:

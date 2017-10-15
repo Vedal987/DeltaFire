@@ -40,6 +40,11 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (scoped) {
+			Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
+		} else {
+			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.09f);
+		}
 		shootTimer -= Time.deltaTime;
 		if (Input.GetKey (KeyCode.LeftShift)) {
 			running = true;
