@@ -30,6 +30,7 @@ public class Main : MonoBehaviour {
 
 
 	public bool scoped;
+	public bool running;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +41,19 @@ public class Main : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		shootTimer -= Time.deltaTime;
-		if (!reloading) {
+		if (Input.GetKey (KeyCode.LeftShift)) {
+			running = true;
+			if (scoped) {
+				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+				scoped = false;
+			}
+			pivot.GetComponent<Animator> ().SetBool ("Running", true);
+		} else {
+			running = false;
+			pivot.GetComponent<Animator> ().SetBool ("Running", false);
+		}
+		if (!reloading && !running) {
 			if (Input.GetButtonDown ("Fire2")) {
 				scoped = !scoped;
 				if (scoped) {
