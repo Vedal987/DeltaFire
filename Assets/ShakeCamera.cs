@@ -7,7 +7,7 @@ public class ShakeCamera : MonoBehaviour {
 
 	public void GunShake()
 	{
-		CameraShaker.Instance.ShakeOnce (5f, 2f, 0.2f, 0.3f);
+		CameraShaker.Instance.ShakeOnce (1f, 1f, 0.2f, 0.3f);
 	}
 
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,7 +104,7 @@ public class Main : MonoBehaviour {
 
 	public IEnumerator Shoot()
 	{
-		cam.GetComponent<ShakeCamera> ().GunShake ();
+		pivot.GetComponent<ShakeCamera> ().GunShake ();
 		int ran = Random.Range (0, shoot.Length - 1);
 		gunAnim.SetTrigger ("Fire");
 		yield return new WaitForSeconds (0.02f);
