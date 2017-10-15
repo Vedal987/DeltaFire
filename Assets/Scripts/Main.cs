@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Main : MonoBehaviour {
+	bool remScoped;
 
 	AudioSource ad;
 	public AudioClip[] shoot;
@@ -21,18 +22,39 @@ public class Main : MonoBehaviour {
 
 	public GameObject gun;
 	public Animator gunAnim;
+	public GameObject pivot;
+	public GameObject cam;
 
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
 
+
+	public bool scoped;
+
 	// Use this for initialization
 	void Start () {
 		ad = gun.GetComponent<AudioSource> ();
+		scoped = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		shootTimer -= Time.deltaTime;
+		if (!reloading) {
+			if (Input.GetButtonDown ("Fire2")) {
+				scoped = !scoped;
+				if (scoped) {
+					pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+				} else {
+					pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+				}
+			}
+		}
+
 		if (!reloading && shootTimer < 0) {
 			if (Input.GetButtonDown ("Fire1")) {
 				if (ammoInMag > 0) {
@@ -51,6 +73,13 @@ public class Main : MonoBehaviour {
 	public IEnumerator Reload()
 	{
 		if (!reloading) {
+			if (scoped) {
+				remScoped = true;
+				scoped = false;
+				pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+			}
 			reloading = true;
 			gunAnim.SetTrigger ("Reload");
 			yield return new WaitForSeconds (0.8f);
@@ -63,11 +92,19 @@ public class Main : MonoBehaviour {
 			mags--;
 			ammoInMag = ammoPerMag;
 			reloading = false;
+			yield return new WaitForSeconds (0.2f);
+			if (remScoped) {
+				scoped = true;
+				pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+			}
 		}
 	}
 
 	public IEnumerator Shoot()
 	{
+		cam.GetComponent<ShakeCamera> ().GunShake ();
 		int ran = Random.Range (0, shoot.Length - 1);
 		gunAnim.SetTrigger ("Fire");
 		yield return new WaitForSeconds (0.02f);

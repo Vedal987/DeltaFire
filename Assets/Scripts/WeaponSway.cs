@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WeaponSway : MonoBehaviour {
 
-	float amount = 0.02f;
-	float maxAmount = 0.03f;
+	public float amount = 0.02f;
+	public float maxAmount = 0.03f;
 	float smooth = 3;
 	private Vector3 def;
 
