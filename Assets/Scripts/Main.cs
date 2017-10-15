@@ -31,11 +31,17 @@ public class Main : MonoBehaviour {
 				StartCoroutine (Reload ());
 			}
 		}
+		if (Input.GetKeyDown (KeyCode.R)) {
+			StartCoroutine (Reload ());
+		}
 	}
 
 	public IEnumerator Reload()
 	{
-		yield return new WaitForSeconds (0.5f);
+		gunAnim.SetTrigger ("Reload");
+		yield return new WaitForSeconds (1f);
+		mags--;
+		ammoInMag = ammoPerMag;
 	}
 
 	public IEnumerator Shoot()
@@ -45,11 +51,12 @@ public class Main : MonoBehaviour {
 		yield return new WaitForSeconds (0.02f);
 		ad.PlayOneShot (shoot [ran]);
 		yield return new WaitForSeconds (0.02f);
+		ammoInMag - 1;
 		muzzleLight.SetActive (true);
 		muzzleFlash.SetActive (true);
-		yield return new WaitForSeconds (0.02f);
-		muzzleFlash.SetActive (false);
-		yield return new WaitForSeconds (0.02f);
+		yield return new WaitForSeconds (0.16f);
 		muzzleLight.SetActive (false);
+		yield return new WaitForSeconds (0.04f);
+		muzzleFlash.SetActive (false);
 	}
 }
