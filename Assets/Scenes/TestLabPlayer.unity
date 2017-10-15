@@ -147,56 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4036317157936390, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114260945557989440, guid: 08b477ce7eba9494eb2a5debfad8eba9,
-        type: 2}
-      propertyPath: m_HeadBob.VerticaltoHorizontalRatio
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114260945557989440, guid: 08b477ce7eba9494eb2a5debfad8eba9,
-        type: 2}
-      propertyPath: m_HeadBob.HorizontalBobRange
-      value: 0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
   m_IsPrefabParent: 0
