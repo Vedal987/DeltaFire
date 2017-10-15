@@ -887,35 +887,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 269431574}
   m_Mesh: {fileID: 4300266, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
---- !u!1 &389169594 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1912005638717898, guid: 08b477ce7eba9494eb2a5debfad8eba9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1505224661}
---- !u!114 &389169595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 389169594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a02129fa42bed542b263506e6fe668d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &389169596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 389169594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultPosInfluence: {x: 0.2, y: 0.1, z: 0.2}
-  DefaultRotInfluence: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1 &390929794
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,9 +6406,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114349518689303430, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-    - {fileID: 114541718281952624, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1516269420

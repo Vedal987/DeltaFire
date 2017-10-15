@@ -276,8 +276,6 @@ GameObject:
   - component: {fileID: 81189150813421398}
   - component: {fileID: 124933599361281132}
   - component: {fileID: 114210486118692494}
-  - component: {fileID: 114349518689303430}
-  - component: {fileID: 114541718281952624}
   m_Layer: 0
   m_Name: Head
   m_TagString: MainCamera
@@ -991,6 +989,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4036317157936390}
   - component: {fileID: 95212365813654180}
+  - component: {fileID: 114352199181574808}
+  - component: {fileID: 114151384604206602}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -1092,7 +1092,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029732695063962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0000038, y: 3.08, z: 3.337822}
+  m_LocalPosition: {x: 221.14832, y: 5.86, z: 233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4249810973260166}
@@ -2356,6 +2356,19 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114151384604206602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912005638717898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.2, y: 0.1, z: 0.2}
+  DefaultRotInfluence: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &114210486118692494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2499,25 +2512,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
---- !u!114 &114349518689303430
+--- !u!114 &114352199181574808
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1210266954931444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultPosInfluence: {x: 0.2, y: 0.1, z: 0.2}
-  DefaultRotInfluence: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &114541718281952624
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1210266954931444}
+  m_GameObject: {fileID: 1912005638717898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a02129fa42bed542b263506e6fe668d, type: 3}
