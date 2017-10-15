@@ -51,7 +51,7 @@ public class Main : MonoBehaviour {
 		yield return new WaitForSeconds (0.02f);
 		ad.PlayOneShot (shoot [ran]);
 		yield return new WaitForSeconds (0.02f);
-		ammoInMag - 1;
+		ammoInMag = ammoInMag - 1;
 		muzzleLight.SetActive (true);
 		muzzleFlash.SetActive (true);
 		yield return new WaitForSeconds (0.16f);
