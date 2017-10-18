@@ -1809,8 +1809,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188367595675616}
-  m_LocalRotation: {x: -0.012340746, y: 0.7069991, z: -0.012340746, w: 0.7069991}
-  m_LocalPosition: {x: 0.06199646, y: -0.039000154, z: 0.06599426}
+  m_LocalRotation: {x: -0.014191619, y: 0.7069644, z: -0.014191619, w: 0.7069644}
+  m_LocalPosition: {x: 0.06199646, y: -0.035, z: 0.06599426}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4491351720750008}
@@ -1828,7 +1828,7 @@ Transform:
   - {fileID: 4926733195950872}
   m_Father: {fileID: 4036317157936390}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -2}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -2.3}
 --- !u!4 &4786079281409408
 Transform:
   m_ObjectHideFlags: 1
@@ -2459,10 +2459,11 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1349542810570572}
   TracerRound: {fileID: 100582, guid: 1be8998b5f16ad140964500968515560, type: 2}
   bulletHole: {fileID: 1710740072580404, guid: 416e2f6fb7dbaf748a09f1e0a06fdc5b, type: 2}
-  glassImpact: {fileID: 0}
+  glassImpact: {fileID: 1819204817034968, guid: 5374640796ae0f94faaa77841aa2afff,
+    type: 2}
   woodImpact: {fileID: 144040, guid: 68b67cf56f2189644ace5b78042353ef, type: 2}
   metalImpact: {fileID: 137676, guid: 4b1de2252d29f1a4fa913046ed11a098, type: 2}
-  bloodSplat: {fileID: 0}
+  bloodSplat: {fileID: 100000, guid: 80cd87e5e66b84b35b29f75198eeda8b, type: 2}
   scoped: 0
   running: 0
   distanceFired: 50000

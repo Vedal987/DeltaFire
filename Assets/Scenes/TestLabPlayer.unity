@@ -846,41 +846,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.035
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0.014191619
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.7069644
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0.014191619
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.7069644
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776236847633198, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -2.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114235953752800288, guid: 08b477ce7eba9494eb2a5debfad8eba9,
-        type: 2}
-      propertyPath: glassImpact
-      value: 
-      objectReference: {fileID: 1819204817034968, guid: 5374640796ae0f94faaa77841aa2afff,
-        type: 2}
-    - target: {fileID: 114235953752800288, guid: 08b477ce7eba9494eb2a5debfad8eba9,
-        type: 2}
-      propertyPath: bloodSplat
-      value: 
-      objectReference: {fileID: 100000, guid: 80cd87e5e66b84b35b29f75198eeda8b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
   m_IsPrefabParent: 0
