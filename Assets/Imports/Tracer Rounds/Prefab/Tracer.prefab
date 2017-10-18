@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 417602}
   - component: {fileID: 9645118}
   - component: {fileID: 11406982}
-  - component: {fileID: 114000010631707484}
+  - component: {fileID: 114575532709640976}
   m_Layer: 0
   m_Name: Tracer
   m_TagString: Untagged
@@ -40,14 +40,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100582}
-  m_LocalRotation: {x: 0, y: 0, z: 0.04187566, w: 0.99912286}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0000000055879354, y: -0.000000059604645, z: 0.041875616,
+    w: 0.99912286}
+  m_LocalPosition: {x: 221.21031, y: 6.821, z: 233.625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 492718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 4.8}
 --- !u!4 &492718
 Transform:
   m_ObjectHideFlags: 1
@@ -97,7 +98,7 @@ TrailRenderer:
   m_Time: 0.075
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -161,8 +162,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.9137255, g: 0.36078432, b: 0.17254902, a: 1}
-  m_Intensity: 0.8
+  m_Color: {r: 0.9137255, g: 0.9137255, b: 0.9137255, a: 1}
+  m_Intensity: 0.6
   m_Range: 15
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -181,7 +182,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661b43d1c5c132b449d97c10d4ab1099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 1
+  despawnTime: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -211,7 +212,7 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100582}
   m_IsPrefabParent: 1
---- !u!114 &114000010631707484
+--- !u!114 &114575532709640976
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -219,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc4ec53f4a5e4b744851f006b241293f, type: 3}
+  m_Script: {fileID: 11500000, guid: 050447fc3b28a8b4eb8e74c6e2a8a8b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 600

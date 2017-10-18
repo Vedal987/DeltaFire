@@ -5,6 +5,11 @@ using UnityEngine;
 public class Main : MonoBehaviour {
 	bool remScoped;
 
+	public int health;
+	public int maxHealth;
+
+	public int bulletDamage;
+
 	AudioSource ad;
 	public AudioClip[] shoot;
 
@@ -28,9 +33,22 @@ public class Main : MonoBehaviour {
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
 
+	public GameObject TracerRound;
+
+	public GameObject bulletHole;
+	public GameObject glassImpact;
+	public GameObject woodImpact;
+	public GameObject metalImpact;
+	public GameObject bloodSplat;
 
 	public bool scoped;
 	public bool running;
+
+	float bulletSpreadX;
+	float bulletSpreadY;
+	Vector3 spread;
+	int timesPenetrated;
+	public float distanceFired;
 
 	// Use this for initialization
 	void Start () {
@@ -45,8 +63,9 @@ public class Main : MonoBehaviour {
 		} else {
 			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.09f);
 		}
+
 		shootTimer -= Time.deltaTime;
-		if (Input.GetKey (KeyCode.LeftShift)) {
+		if (Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController>().isGrounded && this.GetComponent<CharacterController>().velocity.magnitude != 0) {
 			running = true;
 			cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
 			if (scoped) {
@@ -130,12 +149,74 @@ public class Main : MonoBehaviour {
 		yield return new WaitForSeconds (0.02f);
 		ad.PlayOneShot (shoot [ran]);
 		yield return new WaitForSeconds (0.02f);
+		Raycast ();
 		ammoInMag = ammoInMag - 1;
 		muzzleLight.SetActive (true);
+		Instantiate (TracerRound, muzzleLight.transform.position, cam.transform.rotation);
 		muzzleFlash.SetActive (true);
 		yield return new WaitForSeconds (0.16f);
 		muzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
 		muzzleFlash.SetActive (false);
 	}
+
+	public void Raycast() {
+		RaycastHit hit;
+		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
+		bulletSpreadX = Random.Range(-0.5f, 0.5f);
+		bulletSpreadY = Random.Range(-0.5f, 0.5f);
+		if (scoped) {
+			bulletSpreadX = bulletSpreadX / 2;
+			bulletSpreadY = bulletSpreadY / 2;
+		}
+		spread = new Vector3 (bulletSpreadX, bulletSpreadY, 0);
+		if (Physics.Raycast (muzzleLight.transform.position + spread, direction, out hit, distanceFired)) {
+			hasRaycast (hit);
+		}
+	}
+
+	public void RaycastObject(GameObject penetrated) {
+		timesPenetrated++;
+		RaycastHit hit;
+		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
+		if (Physics.Raycast (penetrated.transform.position, direction, out hit, 50) && timesPenetrated < 3) {
+			hasRaycast (hit);
+		} else {
+			timesPenetrated = 0;
+		}
+	}
+
+	public void hasRaycast(RaycastHit hit)
+	{
+		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood")
+		{
+			Instantiate(bulletHole, hit.point, hitRotation);
+			if (hit.transform.gameObject.GetComponent<explosive> ()) {
+				hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+			}
+		}
+		if (hit.transform.tag == "Glass") {
+			RaycastObject (hit.transform.gameObject);
+			Instantiate(glassImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Wood") {
+			RaycastObject (hit.transform.gameObject);
+			Instantiate(woodImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Metal") {
+			Instantiate(metalImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Enemy") {
+			Instantiate(bloodSplat, hit.point, hitRotation);
+			//StartCoroutine (HitEnemy ());
+			hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+		}
+		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
+			hit.transform.gameObject.GetComponent<Rigidbody> ().AddForce(muzzleLight.transform.forward * 500);
+		}
+		//StartCoroutine (SFX (hit));
+	}
+
+
 }
