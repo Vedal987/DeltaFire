@@ -175,11 +175,11 @@ public class Main : MonoBehaviour {
 		}
 	}
 
-	public void RaycastObject(GameObject penetrated) {
+	public void RaycastObject(RaycastHit penetrated) {
 		timesPenetrated++;
 		RaycastHit hit;
 		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
-		if (Physics.Raycast (penetrated.transform.position, direction, out hit, 50) && timesPenetrated < 3) {
+		if (Physics.Raycast (penetrated.point, direction, out hit, 50) && timesPenetrated < 3) {
 			hasRaycast (hit);
 		} else {
 			timesPenetrated = 0;
@@ -198,11 +198,11 @@ public class Main : MonoBehaviour {
 			}
 		}
 		if (hit.transform.tag == "Glass") {
-			RaycastObject (hit.transform.gameObject);
+			RaycastObject (hit);
 			Instantiate(glassImpact, hit.point, hitRotation);
 		}
 		if (hit.transform.tag == "Wood") {
-			RaycastObject (hit.transform.gameObject);
+			RaycastObject (hit);
 			Instantiate(woodImpact, hit.point, hitRotation);
 		}
 		if (hit.transform.tag == "Metal") {
@@ -212,7 +212,7 @@ public class Main : MonoBehaviour {
 			Instantiate(bloodSplat, hit.point, hitRotation);
 			//StartCoroutine (HitEnemy ());
 			//hit.transform.SendMessage ("ApplyDamage", bulletDamage);
-			RaycastObject (hit.transform.gameObject);
+			RaycastObject (hit);
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
 			hit.transform.gameObject.GetComponent<Rigidbody> ().AddForce(muzzleLight.transform.forward * 500);

@@ -9,6 +9,7 @@ TagManager:
   - Metal
   - Wood
   - Enemy
+  - Ladder
   layers:
   - Default
   - TransparentFX
