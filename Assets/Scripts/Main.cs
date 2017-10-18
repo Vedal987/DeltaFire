@@ -152,7 +152,6 @@ public class Main : MonoBehaviour {
 		Raycast ();
 		ammoInMag = ammoInMag - 1;
 		muzzleLight.SetActive (true);
-		Instantiate (TracerRound, muzzleLight.transform.position, cam.transform.rotation);
 		muzzleFlash.SetActive (true);
 		yield return new WaitForSeconds (0.16f);
 		muzzleLight.SetActive (false);
@@ -163,12 +162,13 @@ public class Main : MonoBehaviour {
 	public void Raycast() {
 		RaycastHit hit;
 		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
-		bulletSpreadX = Random.Range(-0.05f, 0.05f);
-		bulletSpreadY = Random.Range(-0.05f, 0.05f);
+		bulletSpreadX = Random.Range(-0.01f, 0.01f);
+		bulletSpreadY = Random.Range(-0.01f, 0.01f);
 		if (scoped) {
-			bulletSpreadX = bulletSpreadX / 2;
-			bulletSpreadY = bulletSpreadY / 2;
+			bulletSpreadX = 0;
+			bulletSpreadY = 0;
 		}
+		Instantiate (TracerRound, muzzleLight.transform.position + spread, cam.transform.rotation);
 		spread = new Vector3 (bulletSpreadX, bulletSpreadY, 0);
 		if (Physics.Raycast (muzzleLight.transform.position + spread, direction, out hit, distanceFired)) {
 			hasRaycast (hit);
@@ -191,7 +191,8 @@ public class Main : MonoBehaviour {
 		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
 		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood")
 		{
-			Instantiate(bulletHole, hit.point, hitRotation, hit.transform);
+			GameObject hole = Instantiate(bulletHole, hit.point, hitRotation) as GameObject;
+			hole.transform.SetParent (hit.transform, true);
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
 				hit.transform.SendMessage ("ApplyDamage", bulletDamage);
 			}

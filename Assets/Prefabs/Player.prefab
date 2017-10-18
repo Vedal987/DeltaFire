@@ -1136,7 +1136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029732695063962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 221.14832, y: 5.86, z: 233}
+  m_LocalPosition: {x: -3.0127804, y: 3.16, z: 13.510997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4020617908490344}
@@ -1452,13 +1452,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850691147972740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: -0.551, y: -0.054, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4776236847633198}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!4 &4461835397586976
 Transform:
   m_ObjectHideFlags: 1
@@ -2458,14 +2458,14 @@ MonoBehaviour:
   muzzleLight: {fileID: 1850691147972740}
   muzzleFlash: {fileID: 1349542810570572}
   TracerRound: {fileID: 100582, guid: 1be8998b5f16ad140964500968515560, type: 2}
-  bulletHole: {fileID: 1951394426205042, guid: 416e2f6fb7dbaf748a09f1e0a06fdc5b, type: 2}
+  bulletHole: {fileID: 1710740072580404, guid: 416e2f6fb7dbaf748a09f1e0a06fdc5b, type: 2}
   glassImpact: {fileID: 0}
-  woodImpact: {fileID: 0}
-  metalImpact: {fileID: 0}
+  woodImpact: {fileID: 144040, guid: 68b67cf56f2189644ace5b78042353ef, type: 2}
+  metalImpact: {fileID: 137676, guid: 4b1de2252d29f1a4fa913046ed11a098, type: 2}
   bloodSplat: {fileID: 0}
   scoped: 0
   running: 0
-  distanceFired: 500
+  distanceFired: 50000
 --- !u!114 &114260945557989440
 MonoBehaviour:
   m_ObjectHideFlags: 1
