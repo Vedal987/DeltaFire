@@ -211,7 +211,7 @@ public class Main : MonoBehaviour {
 		if (hit.transform.tag == "Enemy") {
 			Instantiate(bloodSplat, hit.point, hitRotation);
 			//StartCoroutine (HitEnemy ());
-			hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+			//hit.transform.SendMessage ("ApplyDamage", bulletDamage);
 			RaycastObject (hit.transform.gameObject);
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
