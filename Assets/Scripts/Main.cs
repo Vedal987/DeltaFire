@@ -94,7 +94,7 @@ public class Main : MonoBehaviour {
 			}
 		}
 
-		if (!reloading && shootTimer < 0) {
+		if (!reloading && shootTimer < 0 && !running) {
 			if (Input.GetButtonDown ("Fire1")) {
 				if (ammoInMag > 0) {
 					shootTimer = timeBetweenShots;
@@ -163,8 +163,8 @@ public class Main : MonoBehaviour {
 	public void Raycast() {
 		RaycastHit hit;
 		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
-		bulletSpreadX = Random.Range(-0.5f, 0.5f);
-		bulletSpreadY = Random.Range(-0.5f, 0.5f);
+		bulletSpreadX = Random.Range(-0.05f, 0.05f);
+		bulletSpreadY = Random.Range(-0.05f, 0.05f);
 		if (scoped) {
 			bulletSpreadX = bulletSpreadX / 2;
 			bulletSpreadY = bulletSpreadY / 2;
@@ -191,7 +191,7 @@ public class Main : MonoBehaviour {
 		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
 		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood")
 		{
-			Instantiate(bulletHole, hit.point, hitRotation);
+			Instantiate(bulletHole, hit.point, hitRotation, hit.transform);
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
 				hit.transform.SendMessage ("ApplyDamage", bulletDamage);
 			}
@@ -211,6 +211,7 @@ public class Main : MonoBehaviour {
 			Instantiate(bloodSplat, hit.point, hitRotation);
 			//StartCoroutine (HitEnemy ());
 			hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+			RaycastObject (hit.transform.gameObject);
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
 			hit.transform.gameObject.GetComponent<Rigidbody> ().AddForce(muzzleLight.transform.forward * 500);
