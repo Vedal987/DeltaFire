@@ -49,6 +49,7 @@ public class Main : MonoBehaviour {
 
 	public bool scoped;
 	public bool running;
+	public bool canShoot = true;
 
 	float bulletSpreadX;
 	float bulletSpreadY;
@@ -86,35 +87,73 @@ public class Main : MonoBehaviour {
 			pivot.GetComponent<Animator> ().SetBool ("Running", false);
 			cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
 		}
-		if (!reloading && !running) {
-			if (Input.GetButtonDown ("Fire2")) {
-				scoped = !scoped;
-				if (scoped) {
-					pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
-					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
-					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
-					controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
-				} else {
-					pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
-					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
-					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
-					controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+		if (canShoot) {
+			if (!reloading && !running) {
+				if (Input.GetButtonDown ("Fire2")) {
+					scoped = !scoped;
+					if (scoped) {
+						pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+						controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+					} else {
+						pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+						controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+					}
 				}
 			}
-		}
 
-		if (!reloading && shootTimer < 0 && !running) {
-			if (Input.GetButtonDown ("Fire1")) {
-				if (ammoInMag > 0) {
-					shootTimer = timeBetweenShots;
-					StartCoroutine (Shoot ());
-				} else {
+			if (!reloading && shootTimer < 0) {
+				if (Input.GetKeyDown (KeyCode.R)) {
 					StartCoroutine (Reload ());
 				}
 			}
-			if (Input.GetKeyDown (KeyCode.R)) {
-				StartCoroutine (Reload ());
+
+			if (!reloading && shootTimer < 0 && !running) {
+				if (Input.GetButtonDown ("Fire1")) {
+					if (ammoInMag > 0) {
+						shootTimer = timeBetweenShots;
+						StartCoroutine (Shoot ());
+					} else {
+						StartCoroutine (Reload ());
+					}
+				}
+
 			}
+		}
+	}
+
+	public void OnLadder()
+	{
+		canShoot = false;
+		gun.GetComponent<Animator> ().SetTrigger ("Ladder");
+		if (scoped) {
+			remScoped = true;
+			scoped = false;
+			pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+			controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+		}
+	}
+	public void OffLadder()
+	{
+		gun.GetComponent<Animator> ().SetTrigger ("Draw");
+		StartCoroutine (Draw ());
+	}
+
+	IEnumerator Draw()
+	{
+		yield return new WaitForSeconds (0.8f);
+		canShoot = true;
+		if (remScoped) {
+			scoped = true;
+			pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+			controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
 		}
 	}
 

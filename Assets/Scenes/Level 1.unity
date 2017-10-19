@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 7e1e5781d39549148abcbf66c428df00, type: 2}
-  m_HaloStrength: 0
+  m_HaloStrength: 0.01
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -120,9 +120,10 @@ GameObject:
   - component: {fileID: 6484261}
   - component: {fileID: 6484260}
   - component: {fileID: 6484259}
+  - component: {fileID: 6484262}
   m_Layer: 0
   m_Name: barrel2
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +152,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -196,6 +197,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 6484257}
   m_Mesh: {fileID: 4300004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &6484262
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6484257}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &38098831 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 109824, guid: f6f9e2b8b6b2fdd4ca11c8edc03103b1, type: 2}
@@ -255,7 +271,7 @@ GameObject:
   - component: {fileID: 43078493}
   m_Layer: 0
   m_Name: fence_2 (104)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +358,7 @@ GameObject:
   - component: {fileID: 43310088}
   m_Layer: 0
   m_Name: fence_2 (128)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,7 +445,7 @@ GameObject:
   - component: {fileID: 50415841}
   m_Layer: 0
   m_Name: fence_2 (41)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,7 +568,7 @@ GameObject:
   - component: {fileID: 91902222}
   m_Layer: 0
   m_Name: fence_2 (57)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -715,7 +731,7 @@ GameObject:
   - component: {fileID: 115202316}
   m_Layer: 0
   m_Name: fence_2 (88)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -915,7 +931,7 @@ GameObject:
   - component: {fileID: 124502301}
   m_Layer: 0
   m_Name: fence_2 (68)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1220,7 +1236,7 @@ GameObject:
   - component: {fileID: 216340986}
   m_Layer: 0
   m_Name: fence_2 (43)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1307,7 +1323,7 @@ GameObject:
   - component: {fileID: 220346895}
   m_Layer: 0
   m_Name: fence_2 (9)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1520,7 +1536,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 66
+  m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90}
 --- !u!65 &224541100
 BoxCollider:
@@ -1547,7 +1563,7 @@ GameObject:
   - component: {fileID: 225003397}
   m_Layer: 0
   m_Name: fence_2 (27)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1634,7 +1650,7 @@ GameObject:
   - component: {fileID: 233044778}
   m_Layer: 0
   m_Name: fence_2 (135)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1721,7 +1737,7 @@ GameObject:
   - component: {fileID: 245305501}
   m_Layer: 0
   m_Name: fence_2 (94)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1882,7 +1898,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 532066205bc320d4aa4647332e9d2ffa, type: 2}
       propertyPath: m_RootOrder
-      value: 67
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 532066205bc320d4aa4647332e9d2ffa, type: 2}
       propertyPath: m_LocalScale.x
@@ -1924,7 +1940,7 @@ GameObject:
   - component: {fileID: 258163279}
   m_Layer: 0
   m_Name: fence_2 (108)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2069,7 +2085,7 @@ GameObject:
   - component: {fileID: 269431576}
   m_Layer: 0
   m_Name: fence_2 (13)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2378,7 +2394,7 @@ GameObject:
   - component: {fileID: 390929796}
   m_Layer: 0
   m_Name: fence_2 (38)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2452,48 +2468,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 390929794}
   m_Mesh: {fileID: 4300266, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
---- !u!1001 &391079980
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 101.650764
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3.5071812
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 235.36053
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &401939138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,7 +2481,7 @@ GameObject:
   - component: {fileID: 401939140}
   m_Layer: 0
   m_Name: fence_2 (105)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2652,7 +2626,7 @@ GameObject:
   - component: {fileID: 404369417}
   m_Layer: 0
   m_Name: fence_2 (99)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2757,7 +2731,7 @@ GameObject:
   - component: {fileID: 432023977}
   m_Layer: 0
   m_Name: fence_2 (54)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2844,7 +2818,7 @@ GameObject:
   - component: {fileID: 435086019}
   m_Layer: 0
   m_Name: fence_2 (62)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3011,7 +2985,7 @@ GameObject:
   - component: {fileID: 443156417}
   m_Layer: 0
   m_Name: fence_2 (120)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3098,7 +3072,7 @@ GameObject:
   - component: {fileID: 448174535}
   m_Layer: 0
   m_Name: fence_2 (14)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3267,7 +3241,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 53414ab72ac45614684af7a6985b2c85, type: 2}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 53414ab72ac45614684af7a6985b2c85, type: 2}
       propertyPath: m_Name
@@ -3301,7 +3275,7 @@ GameObject:
   - component: {fileID: 461968210}
   m_Layer: 0
   m_Name: fence_2 (126)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3388,7 +3362,7 @@ GameObject:
   - component: {fileID: 472169465}
   m_Layer: 0
   m_Name: fence_2 (124)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3555,7 +3529,7 @@ GameObject:
   - component: {fileID: 511961094}
   m_Layer: 0
   m_Name: fence_2 (37)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3642,7 +3616,7 @@ GameObject:
   - component: {fileID: 512828775}
   m_Layer: 0
   m_Name: fence_2 (86)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3729,7 +3703,7 @@ GameObject:
   - component: {fileID: 518961427}
   m_Layer: 0
   m_Name: fence_2 (56)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3816,7 +3790,7 @@ GameObject:
   - component: {fileID: 538621126}
   m_Layer: 0
   m_Name: fence_2 (26)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3903,7 +3877,7 @@ GameObject:
   - component: {fileID: 555164150}
   m_Layer: 0
   m_Name: fence_2 (115)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3989,7 +3963,7 @@ GameObject:
   - component: {fileID: 557242253}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Dirt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4018,7 +3992,7 @@ Terrain:
   m_TreeCrossFadeLength: 200
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 250
-  m_DetailObjectDensity: 1
+  m_DetailObjectDensity: 0.992
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
@@ -4046,7 +4020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: -0.021000002, y: 0.93100005, z: -0.365}
 --- !u!1 &568207527
 GameObject:
@@ -4061,7 +4035,7 @@ GameObject:
   - component: {fileID: 568207529}
   m_Layer: 0
   m_Name: fence_2 (22)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4148,7 +4122,7 @@ GameObject:
   - component: {fileID: 568538219}
   m_Layer: 0
   m_Name: fence_2 (28)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4293,7 +4267,7 @@ GameObject:
   - component: {fileID: 579358347}
   m_Layer: 0
   m_Name: fence_2 (132)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4380,7 +4354,7 @@ GameObject:
   - component: {fileID: 593939176}
   m_Layer: 0
   m_Name: fence_2 (12)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4467,7 +4441,7 @@ GameObject:
   - component: {fileID: 595268680}
   m_Layer: 0
   m_Name: fence_2 (91)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4554,7 +4528,7 @@ GameObject:
   - component: {fileID: 598276928}
   m_Layer: 0
   m_Name: fence_2 (121)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4639,9 +4613,10 @@ GameObject:
   - component: {fileID: 607365004}
   - component: {fileID: 607365003}
   - component: {fileID: 607365002}
+  - component: {fileID: 607365005}
   m_Layer: 0
   m_Name: barrel1
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4670,7 +4645,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -4715,6 +4690,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607365000}
   m_Mesh: {fileID: 4300006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &607365005
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 607365000}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &623437662
 GameObject:
   m_ObjectHideFlags: 0
@@ -4728,7 +4718,7 @@ GameObject:
   - component: {fileID: 623437664}
   m_Layer: 0
   m_Name: fence_2 (51)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4925,7 +4915,7 @@ GameObject:
   - component: {fileID: 654617037}
   m_Layer: 0
   m_Name: fence_2 (63)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5212,6 +5202,46 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -1.33
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400002, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400008, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
   m_IsPrefabParent: 0
@@ -5228,7 +5258,7 @@ GameObject:
   - component: {fileID: 668630251}
   m_Layer: 0
   m_Name: fence_2 (98)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5315,7 +5345,7 @@ GameObject:
   - component: {fileID: 681992395}
   m_Layer: 0
   m_Name: fence_2 (18)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5489,7 +5519,7 @@ GameObject:
   - component: {fileID: 687946433}
   m_Layer: 0
   m_Name: fence_2 (80)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5592,7 +5622,7 @@ GameObject:
   - component: {fileID: 696739553}
   m_Layer: 0
   m_Name: fence_2 (117)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5679,7 +5709,7 @@ GameObject:
   - component: {fileID: 704195454}
   m_Layer: 0
   m_Name: fence_2 (110)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5766,7 +5796,7 @@ GameObject:
   - component: {fileID: 706332716}
   m_Layer: 0
   m_Name: fence_2 (8)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5911,7 +5941,7 @@ GameObject:
   - component: {fileID: 734897250}
   m_Layer: 0
   m_Name: fence_2 (79)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5985,6 +6015,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 734897248}
   m_Mesh: {fileID: 4300266, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+--- !u!1001 &736525103
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 203.30173
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 11.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 273.91324
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4049584331360964, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 08b477ce7eba9494eb2a5debfad8eba9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &758005762
 GameObject:
   m_ObjectHideFlags: 0
@@ -5998,7 +6070,7 @@ GameObject:
   - component: {fileID: 758005764}
   m_Layer: 0
   m_Name: fence_2 (15)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6143,7 +6215,7 @@ GameObject:
   - component: {fileID: 768259344}
   m_Layer: 0
   m_Name: fence_2 (82)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6230,7 +6302,7 @@ GameObject:
   - component: {fileID: 789205053}
   m_Layer: 0
   m_Name: fence_2 (64)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6351,7 +6423,7 @@ GameObject:
   - component: {fileID: 797328203}
   m_Layer: 0
   m_Name: fence_2 (21)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6606,7 +6678,7 @@ GameObject:
   - component: {fileID: 815848269}
   m_Layer: 0
   m_Name: fence_2 (131)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6693,7 +6765,7 @@ GameObject:
   - component: {fileID: 820354079}
   m_Layer: 0
   m_Name: fence_2 (67)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6780,7 +6852,7 @@ GameObject:
   - component: {fileID: 825807839}
   m_Layer: 0
   m_Name: fence_2 (7)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7000,7 +7072,7 @@ GameObject:
   - component: {fileID: 846671169}
   m_Layer: 0
   m_Name: fence_2 (34)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7087,7 +7159,7 @@ GameObject:
   - component: {fileID: 859119807}
   m_Layer: 0
   m_Name: fence_2 (33)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7174,7 +7246,7 @@ GameObject:
   - component: {fileID: 864391781}
   m_Layer: 0
   m_Name: fence_2 (96)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7261,7 +7333,7 @@ GameObject:
   - component: {fileID: 865281205}
   m_Layer: 0
   m_Name: fence_2 (61)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7398,7 +7470,7 @@ GameObject:
   - component: {fileID: 878196126}
   m_Layer: 0
   m_Name: fence_2 (127)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7485,7 +7557,7 @@ GameObject:
   - component: {fileID: 885199584}
   m_Layer: 0
   m_Name: fence_2 (106)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7572,7 +7644,7 @@ GameObject:
   - component: {fileID: 900194977}
   m_Layer: 0
   m_Name: fence_2 (17)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7833,7 +7905,7 @@ GameObject:
   - component: {fileID: 931174144}
   m_Layer: 0
   m_Name: fence_2 (4)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7978,7 +8050,7 @@ GameObject:
   - component: {fileID: 940604713}
   m_Layer: 0
   m_Name: fence_2 (48)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8065,7 +8137,7 @@ GameObject:
   - component: {fileID: 947135509}
   m_Layer: 0
   m_Name: fence_2 (125)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8152,7 +8224,7 @@ GameObject:
   - component: {fileID: 979698911}
   m_Layer: 0
   m_Name: fence_2 (122)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8239,7 +8311,7 @@ GameObject:
   - component: {fileID: 988222780}
   m_Layer: 0
   m_Name: fence_2 (83)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8583,7 +8655,7 @@ GameObject:
   - component: {fileID: 1043952868}
   m_Layer: 0
   m_Name: fence_2 (84)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8803,7 +8875,7 @@ GameObject:
   - component: {fileID: 1064560684}
   m_Layer: 0
   m_Name: fence_2 (23)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8890,7 +8962,7 @@ GameObject:
   - component: {fileID: 1068927042}
   m_Layer: 0
   m_Name: fence_2 (75)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8977,7 +9049,7 @@ GameObject:
   - component: {fileID: 1075036132}
   m_Layer: 0
   m_Name: fence_2 (42)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9064,7 +9136,7 @@ GameObject:
   - component: {fileID: 1075431934}
   m_Layer: 0
   m_Name: fence_2 (25)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9151,7 +9223,7 @@ GameObject:
   - component: {fileID: 1087917875}
   m_Layer: 0
   m_Name: fence_2 (69)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9354,7 +9426,7 @@ GameObject:
   - component: {fileID: 1103934426}
   m_Layer: 0
   m_Name: fence_2 (50)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9499,7 +9571,7 @@ GameObject:
   - component: {fileID: 1126368069}
   m_Layer: 0
   m_Name: fence_2 (111)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9803,9 +9875,10 @@ GameObject:
   - component: {fileID: 1155723699}
   - component: {fileID: 1155723698}
   - component: {fileID: 1155723697}
+  - component: {fileID: 1155723700}
   m_Layer: 0
   m_Name: extinger (1)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9817,7 +9890,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1155723695}
   m_LocalRotation: {x: -0, y: 0.8816338, z: -0, w: -0.47193423}
-  m_LocalPosition: {x: 4.75692, y: 1.8799999, z: 8.582581}
+  m_LocalPosition: {x: 4.75692, y: 2.363, z: 8.582581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1755143611}
@@ -9834,7 +9907,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300008, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -9879,6 +9952,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1155723695}
   m_Mesh: {fileID: 4300008, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &1155723700
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1155723695}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1156709802
 GameObject:
   m_ObjectHideFlags: 0
@@ -9892,7 +9980,7 @@ GameObject:
   - component: {fileID: 1156709804}
   m_Layer: 0
   m_Name: fence_2 (6)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9997,7 +10085,7 @@ GameObject:
   - component: {fileID: 1169206070}
   m_Layer: 0
   m_Name: fence_2 (59)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10204,7 +10292,7 @@ GameObject:
   - component: {fileID: 1185314344}
   m_Layer: 0
   m_Name: fence_2 (100)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10291,7 +10379,7 @@ GameObject:
   - component: {fileID: 1189600225}
   m_Layer: 0
   m_Name: fence_2 (97)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10402,7 +10490,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4174142277687930, guid: e8ceaf0fbc4bb4f4f879dc0b17911b05, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1849887880953654, guid: e8ceaf0fbc4bb4f4f879dc0b17911b05, type: 2}
       propertyPath: m_Name
@@ -10521,7 +10609,7 @@ GameObject:
   - component: {fileID: 1217225505}
   m_Layer: 0
   m_Name: fence_2 (109)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10608,7 +10696,7 @@ GameObject:
   - component: {fileID: 1242231352}
   m_Layer: 0
   m_Name: fence_2 (11)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10695,7 +10783,7 @@ GameObject:
   - component: {fileID: 1258051474}
   m_Layer: 0
   m_Name: fence_2 (39)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10858,7 +10946,7 @@ GameObject:
   - component: {fileID: 1301419354}
   m_Layer: 0
   m_Name: fence_2 (118)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10945,7 +11033,7 @@ GameObject:
   - component: {fileID: 1302956039}
   m_Layer: 0
   m_Name: fence_2 (35)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11090,7 +11178,7 @@ GameObject:
   - component: {fileID: 1319501604}
   m_Layer: 0
   m_Name: fence_2 (101)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11177,7 +11265,7 @@ GameObject:
   - component: {fileID: 1322343420}
   m_Layer: 0
   m_Name: fence_2 (29)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11264,7 +11352,7 @@ GameObject:
   - component: {fileID: 1323690404}
   m_Layer: 0
   m_Name: fence_2 (52)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11455,7 +11543,7 @@ GameObject:
   - component: {fileID: 1365884024}
   m_Layer: 0
   m_Name: fence_2 (45)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11663,6 +11751,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 673a5daab7ec28d4c9e7c80ea6a793c1, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1400236299 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+  m_PrefabInternal: {fileID: 667708538}
+--- !u!54 &1400236304
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1400236299}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1401595475
 Prefab:
   m_ObjectHideFlags: 0
@@ -11752,7 +11859,7 @@ GameObject:
   - component: {fileID: 1402171865}
   m_Layer: 0
   m_Name: fence_2 (89)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11839,7 +11946,7 @@ GameObject:
   - component: {fileID: 1406600916}
   m_Layer: 0
   m_Name: fence_2 (78)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11950,7 +12057,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405610, guid: 41a9c426c6802ce45b46cbaf6d42c71d, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 405610, guid: 41a9c426c6802ce45b46cbaf6d42c71d, type: 2}
       propertyPath: m_LocalScale.x
@@ -12006,7 +12113,7 @@ GameObject:
   - component: {fileID: 1417765371}
   m_Layer: 0
   m_Name: fence_2 (107)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12093,7 +12200,7 @@ GameObject:
   - component: {fileID: 1419934421}
   m_Layer: 0
   m_Name: fence_2 (72)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12180,7 +12287,7 @@ GameObject:
   - component: {fileID: 1421670644}
   m_Layer: 0
   m_Name: fence_2 (74)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12267,7 +12374,7 @@ GameObject:
   - component: {fileID: 1425783058}
   m_Layer: 0
   m_Name: fence_2 (30)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12354,7 +12461,7 @@ GameObject:
   - component: {fileID: 1428621121}
   m_Layer: 0
   m_Name: fence_2 (44)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12441,7 +12548,7 @@ GameObject:
   - component: {fileID: 1435947900}
   m_Layer: 0
   m_Name: fence_2 (90)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12528,7 +12635,7 @@ GameObject:
   - component: {fileID: 1447359147}
   m_Layer: 0
   m_Name: fence_2 (85)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12615,7 +12722,7 @@ GameObject:
   - component: {fileID: 1484744176}
   m_Layer: 0
   m_Name: fence_2 (20)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12763,7 +12870,7 @@ GameObject:
   - component: {fileID: 1499015001}
   m_Layer: 0
   m_Name: fence_2 (49)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12850,7 +12957,7 @@ GameObject:
   - component: {fileID: 1500168441}
   m_Layer: 0
   m_Name: fence_2 (77)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12937,7 +13044,7 @@ GameObject:
   - component: {fileID: 1516269422}
   m_Layer: 0
   m_Name: fence_2 (47)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13024,7 +13131,7 @@ GameObject:
   - component: {fileID: 1529053524}
   m_Layer: 0
   m_Name: fence_2 (112)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13169,7 +13276,7 @@ GameObject:
   - component: {fileID: 1532950508}
   m_Layer: 0
   m_Name: fence_2 (73)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13314,7 +13421,7 @@ GameObject:
   - component: {fileID: 1558895526}
   m_Layer: 0
   m_Name: fence_2 (81)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13469,7 +13576,7 @@ GameObject:
   - component: {fileID: 1572889691}
   m_Layer: 0
   m_Name: fence_2 (103)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13606,7 +13713,7 @@ GameObject:
   - component: {fileID: 1585855332}
   m_Layer: 0
   m_Name: fence_2 (32)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13693,7 +13800,7 @@ GameObject:
   - component: {fileID: 1590118645}
   m_Layer: 0
   m_Name: fence_2 (55)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13767,6 +13874,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1590118643}
   m_Mesh: {fileID: 4300266, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+--- !u!1 &1596113560 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+  m_PrefabInternal: {fileID: 667708538}
+--- !u!54 &1596113565
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596113560}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1596734412 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 08f2afcbabf60c440a0b5785d59e06c6, type: 2}
@@ -13810,7 +13936,7 @@ GameObject:
   - component: {fileID: 1598267779}
   m_Layer: 0
   m_Name: fence_2 (119)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13897,7 +14023,7 @@ GameObject:
   - component: {fileID: 1601075481}
   m_Layer: 0
   m_Name: fence_2 (31)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13984,7 +14110,7 @@ GameObject:
   - component: {fileID: 1608326289}
   m_Layer: 0
   m_Name: fence_2 (71)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14100,6 +14226,25 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a47f038f10637349b6b98a4aaa2b379, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1625697247 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+  m_PrefabInternal: {fileID: 667708538}
+--- !u!54 &1625697252
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1625697247}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1644794545 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 109824, guid: f6f9e2b8b6b2fdd4ca11c8edc03103b1, type: 2}
@@ -14131,7 +14276,7 @@ GameObject:
   - component: {fileID: 1653091034}
   m_Layer: 0
   m_Name: fence_2 (129)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14218,7 +14363,7 @@ GameObject:
   - component: {fileID: 1671089073}
   m_Layer: 0
   m_Name: fence_2 (116)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14305,7 +14450,7 @@ GameObject:
   - component: {fileID: 1674181820}
   m_Layer: 0
   m_Name: fence_2 (16)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14410,7 +14555,7 @@ GameObject:
   - component: {fileID: 1692152325}
   m_Layer: 0
   m_Name: fence_2 (10)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14497,7 +14642,7 @@ GameObject:
   - component: {fileID: 1698759660}
   m_Layer: 0
   m_Name: fence_2 (36)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14781,9 +14926,10 @@ GameObject:
   - component: {fileID: 1752039205}
   - component: {fileID: 1752039204}
   - component: {fileID: 1752039203}
+  - component: {fileID: 1752039206}
   m_Layer: 0
   m_Name: gascan (1)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14795,7 +14941,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1752039201}
   m_LocalRotation: {x: -0, y: 0.8816338, z: -0, w: -0.47193423}
-  m_LocalPosition: {x: 2.93, y: 1.14, z: 11.24}
+  m_LocalPosition: {x: 2.93, y: 1.535, z: 11.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1755143611}
@@ -14812,7 +14958,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -14857,6 +15003,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1752039201}
   m_Mesh: {fileID: 4300000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &1752039206
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1752039201}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1752298914
 GameObject:
   m_ObjectHideFlags: 0
@@ -14870,7 +15031,7 @@ GameObject:
   - component: {fileID: 1752298916}
   m_Layer: 0
   m_Name: fence_2 (5)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15019,7 +15180,7 @@ GameObject:
   - component: {fileID: 1764071740}
   m_Layer: 0
   m_Name: fence_2 (123)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15106,7 +15267,7 @@ GameObject:
   - component: {fileID: 1773487283}
   m_Layer: 0
   m_Name: fence_2 (60)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15193,7 +15354,7 @@ GameObject:
   - component: {fileID: 1775733144}
   m_Layer: 0
   m_Name: fence_2 (92)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15543,7 +15704,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1812822344
 GameObject:
@@ -15581,7 +15742,7 @@ Transform:
   - {fileID: 1883150206}
   - {fileID: 1736285552}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1821705454
 GameObject:
@@ -15596,7 +15757,7 @@ GameObject:
   - component: {fileID: 1821705456}
   m_Layer: 0
   m_Name: fence_2 (70)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15754,7 +15915,7 @@ GameObject:
   - component: {fileID: 1850865798}
   m_Layer: 0
   m_Name: fence_2 (113)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15841,7 +16002,7 @@ GameObject:
   - component: {fileID: 1853012353}
   m_Layer: 0
   m_Name: fence_2 (40)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15928,7 +16089,7 @@ GameObject:
   - component: {fileID: 1859403322}
   m_Layer: 0
   m_Name: fence_2 (134)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16015,7 +16176,7 @@ GameObject:
   - component: {fileID: 1872042664}
   m_Layer: 0
   m_Name: fence_2 (58)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16247,7 +16408,7 @@ GameObject:
   - component: {fileID: 1908005087}
   m_Layer: 0
   m_Name: fence_2 (102)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16358,7 +16519,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08f2afcbabf60c440a0b5785d59e06c6, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 08f2afcbabf60c440a0b5785d59e06c6, type: 2}
       propertyPath: m_Name
@@ -16412,9 +16573,10 @@ GameObject:
   - component: {fileID: 1925239902}
   - component: {fileID: 1925239901}
   - component: {fileID: 1925239900}
+  - component: {fileID: 1925239903}
   m_Layer: 0
   m_Name: barrel2 (1)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16426,7 +16588,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1925239898}
   m_LocalRotation: {x: -0.3152053, y: 0.6561561, z: -0.588844, w: -0.35123715}
-  m_LocalPosition: {x: 3.299, y: 1.487, z: 8.436}
+  m_LocalPosition: {x: 3.349, y: 2.038, z: 8.469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1755143611}
@@ -16443,7 +16605,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -16488,6 +16650,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1925239898}
   m_Mesh: {fileID: 4300004, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &1925239903
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925239898}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1941818436
 GameObject:
   m_ObjectHideFlags: 0
@@ -16501,7 +16678,7 @@ GameObject:
   - component: {fileID: 1941818438}
   m_Layer: 0
   m_Name: fence_2 (133)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16682,6 +16859,50 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -0.30400002
       objectReference: {fileID: 0}
+    - target: {fileID: 100104, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100106, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100098, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100092, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100102, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100094, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100086, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100090, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+      propertyPath: m_TagString
+      value: Metal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
   m_IsPrefabParent: 0
@@ -16702,7 +16923,7 @@ GameObject:
   - component: {fileID: 1955810461}
   m_Layer: 0
   m_Name: fence_2 (66)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16876,7 +17097,7 @@ GameObject:
   - component: {fileID: 1961314762}
   m_Layer: 0
   m_Name: fence_2 (53)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17079,7 +17300,7 @@ GameObject:
   - component: {fileID: 1982866689}
   m_Layer: 0
   m_Name: fence_2 (65)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17166,7 +17387,7 @@ GameObject:
   - component: {fileID: 1985874870}
   m_Layer: 0
   m_Name: fence_2 (93)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17371,7 +17592,7 @@ GameObject:
   - component: {fileID: 2020471925}
   m_Layer: 0
   m_Name: fence_2 (19)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17456,9 +17677,10 @@ GameObject:
   - component: {fileID: 2024325752}
   - component: {fileID: 2024325751}
   - component: {fileID: 2024325750}
+  - component: {fileID: 2024325753}
   m_Layer: 0
   m_Name: gascan
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17487,7 +17709,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -17532,6 +17754,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2024325748}
   m_Mesh: {fileID: 4300000, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &2024325753
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2024325748}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2028072426
 GameObject:
   m_ObjectHideFlags: 0
@@ -17545,7 +17782,7 @@ GameObject:
   - component: {fileID: 2028072428}
   m_Layer: 0
   m_Name: fence_2 (24)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17632,7 +17869,7 @@ GameObject:
   - component: {fileID: 2032061865}
   m_Layer: 0
   m_Name: fence_2 (76)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17706,6 +17943,25 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032061863}
   m_Mesh: {fileID: 4300266, guid: 70bd327581f110b4a936db6df5f9ed54, type: 3}
+--- !u!1 &2035192893 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100010, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+  m_PrefabInternal: {fileID: 667708538}
+--- !u!54 &2035192898
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2035192893}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2048579752
 Prefab:
   m_ObjectHideFlags: 0
@@ -17777,7 +18033,7 @@ GameObject:
   - component: {fileID: 2060850718}
   m_Layer: 0
   m_Name: fence_2 (95)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17862,9 +18118,10 @@ GameObject:
   - component: {fileID: 2071828588}
   - component: {fileID: 2071828587}
   - component: {fileID: 2071828586}
+  - component: {fileID: 2071828589}
   m_Layer: 0
   m_Name: barrel1 (1)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17876,7 +18133,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2071828584}
   m_LocalRotation: {x: -0, y: 0.8816338, z: -0, w: -0.47193423}
-  m_LocalPosition: {x: 3.8966675, y: 1.587, z: 9.883865}
+  m_LocalPosition: {x: 3.8966675, y: 1.973, z: 9.883865}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1755143611}
@@ -17893,7 +18150,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
+  m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
@@ -17938,6 +18195,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2071828584}
   m_Mesh: {fileID: 4300006, guid: fd0966b1746afa347a99425e91f42592, type: 3}
+--- !u!54 &2071828589
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2071828584}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2087353177
 Prefab:
   m_ObjectHideFlags: 0
@@ -18009,7 +18281,7 @@ GameObject:
   - component: {fileID: 2096289885}
   m_Layer: 0
   m_Name: fence_2 (114)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18154,7 +18426,7 @@ GameObject:
   - component: {fileID: 2105488565}
   m_Layer: 0
   m_Name: fence_2 (87)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18241,7 +18513,7 @@ GameObject:
   - component: {fileID: 2115392909}
   m_Layer: 0
   m_Name: fence_2 (46)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18328,7 +18600,7 @@ GameObject:
   - component: {fileID: 2135561883}
   m_Layer: 0
   m_Name: fence_2 (130)
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
