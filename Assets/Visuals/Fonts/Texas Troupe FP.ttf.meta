@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 648bc4795e0dd5c4daff969abc76e271
+timeCreated: 1508521757
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Texas Troupe FP
+  fontNames:
+  - Texas Troupe FP
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
