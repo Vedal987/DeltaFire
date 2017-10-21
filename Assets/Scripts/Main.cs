@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.FirstPerson;
 using Photon;
 
@@ -294,7 +295,13 @@ public class Main : Photon.MonoBehaviour {
 	{
 		health -= dmg;
 		Debug.Log ("Taken Damage");
-
+		if (health < 0) {
+			if (photonView.isMine) {
+				GameObject.Find ("_Manager").GetComponent<Manager> ().loading.SetActive (true);
+				PhotonNetwork.Disconnect ();
+				SceneManager.LoadScene ("TestLabPlayer");
+			}
+		}
 	}
 
 }
