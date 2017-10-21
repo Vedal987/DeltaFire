@@ -4,6 +4,7 @@ using System.Collections;
 public class Headshot : MonoBehaviour {
 
 	public GameObject parent;
+	public float multiplier;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,7 @@ public class Headshot : MonoBehaviour {
 
 	void ApplyDamage(int damage)
 	{
-		parent.SendMessage ("ApplyDamage", damage * 5);
+		parent.SendMessage ("ApplyDamage", damage * multiplier);
 		Debug.Log ("HEADSHOT");
 	}
 }

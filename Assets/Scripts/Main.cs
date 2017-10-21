@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Main : MonoBehaviour {
 	bool remScoped;
+
+	public FirstPersonController controller;
 
 	public int health;
 	public int maxHealth;
@@ -39,10 +42,14 @@ public class Main : MonoBehaviour {
 	public GameObject glassImpact;
 	public GameObject woodImpact;
 	public GameObject metalImpact;
+	public GameObject groundImpact;
+	public GameObject brickImpact;
+	public GameObject waterImpact;
 	public GameObject bloodSplat;
 
 	public bool scoped;
 	public bool running;
+	public bool canShoot = true;
 
 	float bulletSpreadX;
 	float bulletSpreadY;
@@ -71,6 +78,7 @@ public class Main : MonoBehaviour {
 			if (scoped) {
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+				controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
 				scoped = false;
 			}
 			pivot.GetComponent<Animator> ().SetBool ("Running", true);
@@ -79,33 +87,73 @@ public class Main : MonoBehaviour {
 			pivot.GetComponent<Animator> ().SetBool ("Running", false);
 			cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
 		}
-		if (!reloading && !running) {
-			if (Input.GetButtonDown ("Fire2")) {
-				scoped = !scoped;
-				if (scoped) {
-					pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
-					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
-					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
-				} else {
-					pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
-					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
-					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+		if (canShoot) {
+			if (!reloading && !running) {
+				if (Input.GetButtonDown ("Fire2")) {
+					scoped = !scoped;
+					if (scoped) {
+						pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+						controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+					} else {
+						pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+						controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+					}
 				}
 			}
-		}
 
-		if (!reloading && shootTimer < 0 && !running) {
-			if (Input.GetButtonDown ("Fire1")) {
-				if (ammoInMag > 0) {
-					shootTimer = timeBetweenShots;
-					StartCoroutine (Shoot ());
-				} else {
+			if (!reloading && shootTimer < 0) {
+				if (Input.GetKeyDown (KeyCode.R)) {
 					StartCoroutine (Reload ());
 				}
 			}
-			if (Input.GetKeyDown (KeyCode.R)) {
-				StartCoroutine (Reload ());
+
+			if (!reloading && shootTimer < 0 && !running) {
+				if (Input.GetButtonDown ("Fire1")) {
+					if (ammoInMag > 0) {
+						shootTimer = timeBetweenShots;
+						StartCoroutine (Shoot ());
+					} else {
+						StartCoroutine (Reload ());
+					}
+				}
+
 			}
+		}
+	}
+
+	public void OnLadder()
+	{
+		canShoot = false;
+		gun.GetComponent<Animator> ().SetTrigger ("Ladder");
+		if (scoped) {
+			remScoped = true;
+			scoped = false;
+			pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+			controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+		}
+	}
+	public void OffLadder()
+	{
+		gun.GetComponent<Animator> ().SetTrigger ("Draw");
+		StartCoroutine (Draw ());
+	}
+
+	IEnumerator Draw()
+	{
+		yield return new WaitForSeconds (0.8f);
+		canShoot = true;
+		if (remScoped) {
+			scoped = true;
+			pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+			controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
 		}
 	}
 
@@ -116,6 +164,7 @@ public class Main : MonoBehaviour {
 				remScoped = true;
 				scoped = false;
 				pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+				controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
 			}
@@ -137,6 +186,7 @@ public class Main : MonoBehaviour {
 				pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+				controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
 			}
 		}
 	}
@@ -189,7 +239,7 @@ public class Main : MonoBehaviour {
 	public void hasRaycast(RaycastHit hit)
 	{
 		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood")
+		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood" || hit.transform.tag == "Dirt" || hit.transform.tag == "Brick")
 		{
 			GameObject hole = Instantiate(bulletHole, hit.point, hitRotation) as GameObject;
 			hole.transform.SetParent (hit.transform, true);
@@ -204,6 +254,15 @@ public class Main : MonoBehaviour {
 		if (hit.transform.tag == "Wood") {
 			RaycastObject (hit);
 			Instantiate(woodImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Dirt") {
+			Instantiate(groundImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Water") {
+			Instantiate(waterImpact, hit.point, hitRotation);
+		}
+		if (hit.transform.tag == "Brick") {
+			Instantiate(groundImpact, hit.point, hitRotation);
 		}
 		if (hit.transform.tag == "Metal") {
 			Instantiate(metalImpact, hit.point, hitRotation);
