@@ -44,7 +44,6 @@ public class Manager : Photon.MonoBehaviour {
 
 	void OnJoinedRoom()
 	{
-		Debug.Log("JoinedRoom");
 		loadingStat = "ROOM JOINED, SPAWNING PLAYER";
 		Spawn ();
 	}

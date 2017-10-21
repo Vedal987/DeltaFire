@@ -281,9 +281,7 @@ public class Main : Photon.MonoBehaviour {
 		}
 		if (hit.transform.tag == "Enemy") {
 			Instantiate(bloodSplat, hit.point, hitRotation);
-			Debug.Log(hit.transform.name);
 			Headshot hs = hit.transform.GetComponent<Headshot>();
-			Debug.Log (hs);
 			GameObject gm = hs.parent;
 			PhotonView pv = gm.GetComponent<PhotonView>();
 			int dmg = Mathf.RoundToInt(bulletDamage * hit.transform.GetComponent<Headshot> ().multiplier);
@@ -300,7 +298,6 @@ public class Main : Photon.MonoBehaviour {
 	public void ApplyDamage(int dmg)
 	{
 		health -= dmg;
-		Debug.Log ("Taken Damage");
 		if (health < 0) {
 			if (photonView.isMine) {
 				GameObject.Find ("_Manager").GetComponent<Manager> ().loading.SetActive (true);
