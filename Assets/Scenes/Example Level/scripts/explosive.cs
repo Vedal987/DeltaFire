@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon;
 
-public class explosive : MonoBehaviour {
+public class explosive : Photon.MonoBehaviour {
 	public float hitpoints = 100f;
 	public Transform spawnobject;
 	public GameObject explosion;
@@ -34,10 +35,10 @@ public class explosive : MonoBehaviour {
 		}
 	
 	}
-	void ApplyDamage (float damage) 
-	{
-		
 
+	[PunRPC]
+	public void ApplyDamage (int damage) 
+	{
 		hitpoints = hitpoints - damage;
 	}
 }

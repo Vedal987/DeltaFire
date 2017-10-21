@@ -53,10 +53,10 @@ public class Manager : Photon.MonoBehaviour {
 		Transform point = SpawnPoints [Random.Range (0, SpawnPoints.Length)].transform;
 		GameObject player = PhotonNetwork.Instantiate ("Player", point.position, Quaternion.identity, 0) as GameObject;
 		player.GetComponent<FirstPersonController> ().enabled = true;
-		player.GetComponent<Main> ().enabled = true;
 		player.GetComponent<CharacterController> ().enabled = true;
+		player.GetComponent<CapsuleCollider> ().enabled = false;
 		player.transform.tag = "Player";
-		player.transform.GetChild (1).gameObject.SetActive (false);
+		player.transform.GetChild (1).transform.GetChild(0).GetComponent<SkinnedMeshRenderer> ().enabled = false;
 		player.transform.GetChild (0).gameObject.GetComponent<CameraShaker> ().enabled = true;
 		GameObject cam = player.transform.GetChild (0).GetChild (0).gameObject;
 		cam.GetComponent<Camera> ().enabled = true;

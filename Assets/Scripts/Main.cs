@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
+using Photon;
 
-public class Main : MonoBehaviour {
+public class Main : Photon.MonoBehaviour {
 	bool remScoped;
 
 	public FirstPersonController controller;
@@ -65,65 +66,68 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (scoped) {
-			Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
-		} else {
-			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60f, 0.09f);
-		}
-
-		shootTimer -= Time.deltaTime;
-		if (Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController>().isGrounded && this.GetComponent<CharacterController>().velocity.magnitude != 0) {
-			running = true;
-			cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
+		if (photonView.isMine) {
 			if (scoped) {
-				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
-				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
-				controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
-				scoped = false;
+				Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
+			} else {
+				Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 60f, 0.09f);
 			}
-			pivot.GetComponent<Animator> ().SetBool ("Running", true);
-		} else {
-			running = false;
-			pivot.GetComponent<Animator> ().SetBool ("Running", false);
-			cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
-		}
-		if (canShoot) {
-			if (!reloading && !running) {
-				if (Input.GetButtonDown ("Fire2")) {
-					scoped = !scoped;
-					if (scoped) {
-						pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
-						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
-						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
-						controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
-					} else {
-						pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
-						gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
-						gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
-						controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+
+			shootTimer -= Time.deltaTime;
+			if (Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
+				running = true;
+				cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
+				if (scoped) {
+					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+					controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+					scoped = false;
+				}
+				pivot.GetComponent<Animator> ().SetBool ("Running", true);
+			} else {
+				running = false;
+				pivot.GetComponent<Animator> ().SetBool ("Running", false);
+				cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
+			}
+			if (canShoot) {
+				if (!reloading && !running) {
+					if (Input.GetButtonDown ("Fire2")) {
+						scoped = !scoped;
+						if (scoped) {
+							pivot.GetComponent<Animator> ().SetTrigger ("ScopeIn");
+							gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
+							gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
+							controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+						} else {
+							pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
+							gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
+							gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+							controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+						}
 					}
 				}
-			}
 
-			if (!reloading && shootTimer < 0) {
-				if (Input.GetKeyDown (KeyCode.R)) {
-					StartCoroutine (Reload ());
-				}
-			}
-
-			if (!reloading && shootTimer < 0 && !running) {
-				if (Input.GetButtonDown ("Fire1")) {
-					if (ammoInMag > 0) {
-						shootTimer = timeBetweenShots;
-						StartCoroutine (Shoot ());
-					} else {
+				if (!reloading && shootTimer < 0) {
+					if (Input.GetKeyDown (KeyCode.R)) {
 						StartCoroutine (Reload ());
 					}
 				}
 
+				if (!reloading && shootTimer < 0 && !running) {
+					if (Input.GetButtonDown ("Fire1")) {
+						if (ammoInMag > 0) {
+							shootTimer = timeBetweenShots;
+							StartCoroutine (Shoot ());
+						} else {
+							StartCoroutine (Reload ());
+						}
+					}
+
+				}
 			}
 		}
 	}
+	
 
 	public void OnLadder()
 	{
@@ -244,7 +248,8 @@ public class Main : MonoBehaviour {
 			GameObject hole = Instantiate(bulletHole, hit.point, hitRotation) as GameObject;
 			hole.transform.SetParent (hit.transform, true);
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
-				hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+				PhotonView pv = hit.transform.GetComponent<PhotonView> ();
+				pv.RPC("ApplyDamage", PhotonTargets.All, bulletDamage);
 			}
 		}
 		if (hit.transform.tag == "Glass") {
@@ -269,8 +274,13 @@ public class Main : MonoBehaviour {
 		}
 		if (hit.transform.tag == "Enemy") {
 			Instantiate(bloodSplat, hit.point, hitRotation);
-			//StartCoroutine (HitEnemy ());
-			//hit.transform.SendMessage ("ApplyDamage", bulletDamage);
+			Debug.Log(hit.transform.name);
+			Headshot hs = hit.transform.GetComponent<Headshot>();
+			Debug.Log (hs);
+			GameObject gm = hs.parent;
+			PhotonView pv = gm.GetComponent<PhotonView>();
+			int dmg = Mathf.RoundToInt(bulletDamage * hit.transform.GetComponent<Headshot> ().multiplier);
+			pv.RPC("ApplyDamage", PhotonTargets.All, dmg);
 			RaycastObject (hit);
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
@@ -279,5 +289,12 @@ public class Main : MonoBehaviour {
 		//StartCoroutine (SFX (hit));
 	}
 
+	[PunRPC]
+	public void ApplyDamage(int dmg)
+	{
+		health -= dmg;
+		Debug.Log ("Taken Damage");
+
+	}
 
 }
