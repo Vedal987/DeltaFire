@@ -64,6 +64,12 @@ public class Main : Photon.MonoBehaviour {
 		ad = gun.GetComponent<AudioSource> ();
 		scoped = false;
 	}
+
+	[PunRPC]
+	public void RunningAnim()
+	{
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
