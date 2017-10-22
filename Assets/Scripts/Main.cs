@@ -16,6 +16,7 @@ public class Main : Photon.MonoBehaviour {
 	public int bulletDamage;
 
 	AudioSource ad;
+	public AudioSource ad2;
 	public AudioClip[] shoot;
 
 	public AudioClip magIn;
@@ -38,6 +39,8 @@ public class Main : Photon.MonoBehaviour {
 
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
+	public GameObject modelMuzzleLight;
+	public GameObject modelMuzzleFlash;
 
 	public GameObject TracerRound;
 
@@ -60,6 +63,9 @@ public class Main : Photon.MonoBehaviour {
 	int timesPenetrated;
 	public float distanceFired;
 
+	bool isAnimatingRun;
+	bool isAnimatingWalk;
+
 	// Use this for initialization
 	void Start () {
 		ad = gun.GetComponent<AudioSource> ();
@@ -69,6 +75,7 @@ public class Main : Photon.MonoBehaviour {
 	[PunRPC]
 	public void Animate(string type)
 	{
+		Debug.Log("CalledAnimate");
 		if (photonView.isMine) {
 		} else {
 			if (type == "startRun") {
@@ -89,16 +96,74 @@ public class Main : Photon.MonoBehaviour {
 			if (type == "stopScope") {
 				modelAnim.SetBool ("isAiming", false);
 			}
+			if (type == "startBack") {
+				modelAnim.SetBool ("isBackwards", true);
+			}
+			if (type == "stopBack") {
+				modelAnim.SetBool ("isBackwards", false);
+			}
+			if (type == "startFire") {
+				modelAnim.SetBool ("isFiring", true);
+				StartCoroutine (ModelMuzzle ());
+			}
+			if (type == "stopFire") {
+				modelAnim.SetBool ("isFiring", false);
+			}
 			if (type == "jump") {
 				modelAnim.SetTrigger ("Jump");
+				modelAnim.SetBool ("isRunning", false);
+				modelAnim.SetBool ("isWalking", false);
 			}
 		}
 
+	}
+
+	IEnumerator ModelMuzzle()
+	{
+		int ran = Random.Range (0, shoot.Length - 1);
+		ad2.PlayOneShot (shoot [ran]);
+		yield return new WaitForSeconds (0.04f);
+		modelMuzzleLight.SetActive (true);
+		modelMuzzleFlash.SetActive (true);
+		yield return new WaitForSeconds (0.11f);
+		modelMuzzleLight.SetActive (false);
+		yield return new WaitForSeconds (0.04f);
+		modelMuzzleFlash.SetActive (false);
+	}
+
+	void CheckAnimation()
+	{
+		if (Input.GetKeyDown (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0 && !isAnimatingWalk) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRun");
+			isAnimatingRun = true;
+		}
+		if (isAnimatingRun && !Input.GetKey (KeyCode.LeftShift)) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
+			isAnimatingRun = false;
+		}
+		if (!isAnimatingWalk && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startWalk");
+			isAnimatingWalk = true;
+		}
+		if (isAnimatingWalk && this.GetComponent<CharacterController> ().velocity.magnitude == 0) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
+			isAnimatingWalk = false;
+		}
+		if (Input.GetKeyDown (KeyCode.Space) && this.GetComponent<CharacterController> ().isGrounded) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "jump");
+		}
+		if (Input.GetKeyDown (KeyCode.S)) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startBack");
+		}
+		if (Input.GetKeyUp (KeyCode.S)) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopBack");
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (photonView.isMine) {
+			CheckAnimation ();
 			if (scoped) {
 				Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
 			} else {
@@ -107,17 +172,7 @@ public class Main : Photon.MonoBehaviour {
 
 			shootTimer -= Time.deltaTime;
 
-			if (!Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
-				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startWalk");
-			} else {
-				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
-			}
-			if (Input.GetKeyDown (KeyCode.Space) && this.GetComponent<CharacterController> ().isGrounded) {
-				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "jump");
-			}
-
 			if (Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
-				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRun");
 
 				running = true;
 				cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
@@ -132,7 +187,6 @@ public class Main : Photon.MonoBehaviour {
 			} else {
 				running = false;
 				pivot.GetComponent<Animator> ().SetBool ("Running", false);
-				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
 				cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
 			}
 			if (canShoot) {
@@ -166,6 +220,7 @@ public class Main : Photon.MonoBehaviour {
 						if (ammoInMag > 0) {
 							shootTimer = timeBetweenShots;
 							StartCoroutine (Shoot ());
+							photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startFire");
 						} else {
 							StartCoroutine (Reload ());
 						}
@@ -263,6 +318,7 @@ public class Main : Photon.MonoBehaviour {
 		muzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
 		muzzleFlash.SetActive (false);
+		photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopFire");
 	}
 
 	public void Raycast() {
