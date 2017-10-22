@@ -2251,7 +2251,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029732695063962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.720113, y: 3.56, z: 16.600828}
+  m_LocalPosition: {x: -5.771516, y: 3.4, z: -4.9380593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4020617908490344}
@@ -4147,7 +4147,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.749
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4424,7 +4424,7 @@ MonoBehaviour:
   maxHealth: 100
   bulletDamage: 10
   shoot:
-  - {fileID: 8300000, guid: 5d4ec5a305858904cba87035ef4a0607, type: 3}
+  - {fileID: 8300000, guid: b0ca5d7444a1e064e936555b8d8971d5, type: 3}
   magIn: {fileID: 8300000, guid: 225674432d87b9d46b5b142312f374e9, type: 3}
   magOut: {fileID: 8300000, guid: 3c1ccb7601cf6354c8756ed27cf955c0, type: 3}
   magBolt: {fileID: 8300000, guid: 0c15da1789d77dc4288d8adb61c3b165, type: 3}
@@ -4438,6 +4438,7 @@ MonoBehaviour:
   gunAnim: {fileID: 95215662327761880}
   pivot: {fileID: 1912005638717898}
   cam: {fileID: 1210266954931444}
+  modelAnim: {fileID: 95950357211826182}
   muzzleLight: {fileID: 1850691147972740}
   muzzleFlash: {fileID: 1349542810570572}
   TracerRound: {fileID: 100582, guid: 1be8998b5f16ad140964500968515560, type: 2}

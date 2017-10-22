@@ -34,6 +34,7 @@ public class Main : Photon.MonoBehaviour {
 	public Animator gunAnim;
 	public GameObject pivot;
 	public GameObject cam;
+	public Animator modelAnim;
 
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
@@ -66,9 +67,33 @@ public class Main : Photon.MonoBehaviour {
 	}
 
 	[PunRPC]
-	public void RunningAnim()
+	public void Animate(string type)
 	{
-		
+		if (photonView.isMine) {
+		} else {
+			if (type == "startRun") {
+				modelAnim.SetBool ("isRunning", true);
+			}
+			if (type == "stopRun") {
+				modelAnim.SetBool ("isRunning", false);
+			}
+			if (type == "startWalk") {
+				modelAnim.SetBool ("isWalking", true);
+			}
+			if (type == "stopWalk") {
+				modelAnim.SetBool ("isWalking", false);
+			}
+			if (type == "startScope") {
+				modelAnim.SetBool ("isAiming", true);
+			}
+			if (type == "stopScope") {
+				modelAnim.SetBool ("isAiming", false);
+			}
+			if (type == "jump") {
+				modelAnim.SetTrigger ("Jump");
+			}
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -81,19 +106,33 @@ public class Main : Photon.MonoBehaviour {
 			}
 
 			shootTimer -= Time.deltaTime;
+
+			if (!Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startWalk");
+			} else {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
+			}
+			if (Input.GetKeyDown (KeyCode.Space) && this.GetComponent<CharacterController> ().isGrounded) {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "jump");
+			}
+
 			if (Input.GetKey (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRun");
+
 				running = true;
 				cam.transform.parent.GetComponent<ShakeCamera> ().running = true;
 				if (scoped) {
 					gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 					gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
 					controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopScope");
 					scoped = false;
 				}
 				pivot.GetComponent<Animator> ().SetBool ("Running", true);
 			} else {
 				running = false;
 				pivot.GetComponent<Animator> ().SetBool ("Running", false);
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
 				cam.transform.parent.GetComponent<ShakeCamera> ().running = false;
 			}
 			if (canShoot) {
@@ -105,11 +144,13 @@ public class Main : Photon.MonoBehaviour {
 							gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
 							gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
 							controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+							photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startScope");
 						} else {
 							pivot.GetComponent<Animator> ().SetTrigger ("ScopeOut");
 							gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 							gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
 							controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
+							photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopScope");
 						}
 					}
 				}
@@ -147,6 +188,7 @@ public class Main : Photon.MonoBehaviour {
 			controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
 			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopScope");
 		}
 	}
 	public void OffLadder()
@@ -165,6 +207,7 @@ public class Main : Photon.MonoBehaviour {
 			gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
 			gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
 			controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startScope");
 		}
 	}
 
@@ -178,6 +221,7 @@ public class Main : Photon.MonoBehaviour {
 				controller.m_WalkSpeed = controller.m_WalkSpeed * 2;
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount * 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount * 2;
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopScope");
 			}
 			reloading = true;
 			gunAnim.SetTrigger ("Reload");
@@ -198,6 +242,7 @@ public class Main : Photon.MonoBehaviour {
 				gun.GetComponent<WeaponSway> ().amount = gun.GetComponent<WeaponSway> ().amount / 2;
 				gun.GetComponent<WeaponSway> ().maxAmount = gun.GetComponent<WeaponSway> ().maxAmount / 2;
 				controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startScope");
 			}
 		}
 	}
@@ -207,14 +252,14 @@ public class Main : Photon.MonoBehaviour {
 		cam.transform.parent.GetComponent<ShakeCamera> ().GunShake ();
 		int ran = Random.Range (0, shoot.Length - 1);
 		gunAnim.SetTrigger ("Fire");
-		yield return new WaitForSeconds (0.02f);
+		yield return new WaitForSeconds (0.01f);
 		ad.PlayOneShot (shoot [ran]);
-		yield return new WaitForSeconds (0.02f);
+		yield return new WaitForSeconds (0.08f);
 		Raycast ();
 		ammoInMag = ammoInMag - 1;
 		muzzleLight.SetActive (true);
 		muzzleFlash.SetActive (true);
-		yield return new WaitForSeconds (0.16f);
+		yield return new WaitForSeconds (0.11f);
 		muzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
 		muzzleFlash.SetActive (false);
@@ -256,7 +301,7 @@ public class Main : Photon.MonoBehaviour {
 			hole.transform.SetParent (hit.transform, true);
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
 				PhotonView pv = hit.transform.GetComponent<PhotonView> ();
-				pv.RPC("ApplyDamage", PhotonTargets.All, bulletDamage);
+				pv.RPC("ApplyDamage", PhotonTargets.AllBuffered, bulletDamage);
 			}
 		}
 		if (hit.transform.tag == "Glass") {
@@ -285,7 +330,7 @@ public class Main : Photon.MonoBehaviour {
 			GameObject gm = hs.parent;
 			PhotonView pv = gm.GetComponent<PhotonView>();
 			int dmg = Mathf.RoundToInt(bulletDamage * hit.transform.GetComponent<Headshot> ().multiplier);
-			pv.RPC("ApplyDamage", PhotonTargets.All, dmg);
+			pv.RPC("ApplyDamage", PhotonTargets.AllBuffered, dmg);
 			RaycastObject (hit);
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
