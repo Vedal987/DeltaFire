@@ -4692,7 +4692,7 @@ MonoBehaviour:
   controller: {fileID: 114260945557989440}
   health: 100
   maxHealth: 100
-  bulletDamage: 10
+  bulletDamage: 30
   ad2: {fileID: 82401095720828266}
   shoot:
   - {fileID: 8300000, guid: b0ca5d7444a1e064e936555b8d8971d5, type: 3}
