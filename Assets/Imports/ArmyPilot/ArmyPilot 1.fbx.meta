@@ -162,7 +162,22 @@ ModelImporter:
     7400038: Standing 2
     9500000: //RootNode
     13700000: Mesh1
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: m4
+    second: {fileID: 2100000, guid: 50627e4b6709a344ca72ffe75db45710, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unity_pilot_body_01
+    second: {fileID: 2100000, guid: 7caa9610e4b45ee4d83c52ffa3982b10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: unity_pilot_head_01
+    second: {fileID: 2100000, guid: dda4414a337475447abab24e0ce9302b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -2784,7 +2799,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle Reload
       takeName: Idle Reload
-      firstFrame: 0
+      firstFrame: 53
       lastFrame: 309
       wrapMode: 0
       orientationOffsetY: 0

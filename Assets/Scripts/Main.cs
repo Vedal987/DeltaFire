@@ -65,6 +65,7 @@ public class Main : Photon.MonoBehaviour {
 
 	bool isAnimatingRun;
 	bool isAnimatingWalk;
+	bool isStrafing;
 
 	// Use this for initialization
 	void Start () {
@@ -75,7 +76,6 @@ public class Main : Photon.MonoBehaviour {
 	[PunRPC]
 	public void Animate(string type)
 	{
-		Debug.Log("CalledAnimate");
 		if (photonView.isMine) {
 		} else {
 			if (type == "startRun") {
@@ -109,10 +109,35 @@ public class Main : Photon.MonoBehaviour {
 			if (type == "stopFire") {
 				modelAnim.SetBool ("isFiring", false);
 			}
+			if (type == "startLeft") {
+				modelAnim.SetBool ("Left", true);
+				if (isAnimatingRun) {
+					modelAnim.SetFloat ("StrafeSpeed", 2f);
+				}
+			}
+			if (type == "stopLeft") {
+				modelAnim.SetBool ("Left", false);
+				modelAnim.SetFloat ("StrafeSpeed", 1f);
+			}
+			if (type == "startRight") {
+				modelAnim.SetBool ("Right", true);
+				if (isAnimatingRun) {
+					modelAnim.SetFloat ("StrafeSpeed", 2f);
+				}
+			}
+			if (type == "stopRight") {
+				modelAnim.SetBool ("Right", false);
+				modelAnim.SetFloat ("StrafeSpeed", 1f);
+			}
 			if (type == "jump") {
 				modelAnim.SetTrigger ("Jump");
-				modelAnim.SetBool ("isRunning", false);
-				modelAnim.SetBool ("isWalking", false);
+				isStrafing = false;
+			}
+			if (type == "startReload") {
+				modelAnim.SetBool ("Reloading", true);
+			}
+			if (type == "stopReload") {
+				modelAnim.SetBool ("Reloading", false);
 			}
 		}
 
@@ -133,22 +158,62 @@ public class Main : Photon.MonoBehaviour {
 
 	void CheckAnimation()
 	{
-		if (Input.GetKeyDown (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0 && !isAnimatingWalk) {
+		if (Input.GetKeyDown (KeyCode.LeftShift) && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0 && !isStrafing) {
 			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRun");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopLeft");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRight");
+			isStrafing = false;
 			isAnimatingRun = true;
 		}
 		if (isAnimatingRun && !Input.GetKey (KeyCode.LeftShift)) {
 			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
 			isAnimatingRun = false;
 		}
-		if (!isAnimatingWalk && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0) {
+		if (isAnimatingWalk && Input.GetKeyDown (KeyCode.LeftShift)) {
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRun");
+		}
+		if (!isAnimatingWalk && this.GetComponent<CharacterController> ().isGrounded && this.GetComponent<CharacterController> ().velocity.magnitude != 0 && !Input.GetKey (KeyCode.LeftShift) && !isStrafing) {
 			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startWalk");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopLeft");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRight");
+			isStrafing = false;
 			isAnimatingWalk = true;
 		}
 		if (isAnimatingWalk && this.GetComponent<CharacterController> ().velocity.magnitude == 0) {
 			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
 			isAnimatingWalk = false;
 		}
+
+		if (!scoped) {
+			if (Input.GetKeyDown (KeyCode.D) && this.GetComponent<CharacterController> ().isGrounded) {
+				if (!Input.GetKey (KeyCode.W) || !Input.GetKey (KeyCode.S)) {
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startRight");
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
+					isStrafing = true;
+				}
+			}
+			if (Input.GetKeyUp (KeyCode.D)) {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRight");
+				isStrafing = false;
+			}
+
+
+			if (Input.GetKeyDown (KeyCode.A) && this.GetComponent<CharacterController> ().isGrounded) {
+				if (!Input.GetKey (KeyCode.W) || !Input.GetKey (KeyCode.S)) {
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startLeft");
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopWalk");
+					photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopRun");
+					isStrafing = true;
+				}
+			}
+			if (Input.GetKeyUp (KeyCode.A)) {
+				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopLeft");
+				isStrafing = false;
+			}
+		}
+
 		if (Input.GetKeyDown (KeyCode.Space) && this.GetComponent<CharacterController> ().isGrounded) {
 			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "jump");
 		}
@@ -280,6 +345,7 @@ public class Main : Photon.MonoBehaviour {
 			}
 			reloading = true;
 			gunAnim.SetTrigger ("Reload");
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startReload");
 			yield return new WaitForSeconds (0.8f);
 			ad.PlayOneShot (magOut);
 			yield return new WaitForSeconds (1.2f);
@@ -299,6 +365,7 @@ public class Main : Photon.MonoBehaviour {
 				controller.m_WalkSpeed = controller.m_WalkSpeed / 2;
 				photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startScope");
 			}
+			photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopReload");
 		}
 	}
 
