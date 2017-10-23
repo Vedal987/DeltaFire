@@ -12,6 +12,8 @@ TagManager:
   - Dirt
   - Water
   - Brick
+  - Spawn
+  - Loading
   layers:
   - Default
   - TransparentFX
