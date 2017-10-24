@@ -35,7 +35,6 @@ namespace UnityStandardAssets.Utility
         private void Start()
         {
             m_OriginalRotation = transform.localRotation;
-			cursorLock = true;
         }
 
 

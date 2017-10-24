@@ -470,7 +470,6 @@ public class Main : Photon.MonoBehaviour {
 			if (photonView.isMine) {
 				GameObject.Find ("_Manager").GetComponent<Manager> ().loading.SetActive (true);
 				PhotonNetwork.Disconnect ();
-				SceneManager.LoadScene ("TestLabPlayer");
 			}
 		}
 	}
