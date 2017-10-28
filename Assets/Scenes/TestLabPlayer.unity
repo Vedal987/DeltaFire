@@ -880,19 +880,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1041164099936684, guid: 82992dbbfed0e14418d8c2c54553d05f, type: 2}
-      propertyPath: m_TagString
-      value: Spawn
+    - target: {fileID: 114670963415223922, guid: 82992dbbfed0e14418d8c2c54553d05f,
+        type: 2}
+      propertyPath: viewIdField
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1372200735609892, guid: 82992dbbfed0e14418d8c2c54553d05f, type: 2}
-      propertyPath: m_TagString
-      value: Spawn
+    - target: {fileID: 114670963415223922, guid: 82992dbbfed0e14418d8c2c54553d05f,
+        type: 2}
+      propertyPath: instantiationId
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1399764706949834, guid: 82992dbbfed0e14418d8c2c54553d05f, type: 2}
-      propertyPath: m_TagString
-      value: Spawn
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114670963415223922, guid: 82992dbbfed0e14418d8c2c54553d05f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 82992dbbfed0e14418d8c2c54553d05f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &719057532

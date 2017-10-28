@@ -39,4 +39,6 @@ MonoBehaviour:
   - ApplyDamage
   - RunningAnim
   - Animate
+  - ExecuteCommand
+  - ExecuteNetworkLog
   DisableAutoOpenWizard: 1

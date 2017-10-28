@@ -35,17 +35,18 @@ namespace UnityStandardAssets.Utility
         private void Start()
         {
             m_OriginalRotation = transform.localRotation;
+			if (cursorLock) {
+				Cursor.lockState = CursorLockMode.Locked;
+			} else {
+				Cursor.lockState = CursorLockMode.None;
+			}
         }
 
 
         private void Update()
         {
 
-			if (cursorLock) {
-				Cursor.lockState = CursorLockMode.Locked;
-			} else {
-				Cursor.lockState = CursorLockMode.None;
-			}
+
             // we make initial calculations from the original local rotation
             transform.localRotation = m_OriginalRotation;
 
