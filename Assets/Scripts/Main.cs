@@ -76,11 +76,11 @@ public class Main : Photon.MonoBehaviour {
 
 	IEnumerator SwitchGuns(int index)
 	{
-		currentGun.GetComponent<Animator> ().SetTrigger ("Hide");
+		//currentGun.GetComponent<Animator> ().SetTrigger ("Hide");
 		canShoot = false;
-		yield return new WaitForSeconds (0.3f);
 		currentGun.SetActive (false);
 		currentGun = guns[index];
+		ad = currentGun.GetComponent<AudioSource> ();
 		gunIndex = index;
 		currentGun.SetActive (true);
 		yield return new WaitForSeconds (0.4f);
