@@ -32,6 +32,9 @@ public class Main : Photon.MonoBehaviour {
 	public GameObject pivot;
 	public GameObject cam;
 	public Animator modelAnim;
+	public GameObject ragdoll;
+	public GameObject gunDrop;
+	public GameObject deathCam;
 
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
@@ -64,7 +67,7 @@ public class Main : Photon.MonoBehaviour {
 	bool isStrafing;
 	bool wantsToShoot;
 
-
+	float respawnTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -292,6 +295,13 @@ public class Main : Photon.MonoBehaviour {
 				}
 			} else {
 				pivot.GetComponent<Crosshair> ().doSpread = false;
+			}
+			if (respawnTimer > 0) {
+				respawnTimer -= Time.deltaTime;
+				if (respawnTimer <= 0) {
+					GameObject.Find ("_Manager").GetComponent<Manager> ().Spawn ();
+					PhotonNetwork.Destroy (this.gameObject);
+				}
 			}
 			CheckAnimation ();
 			if (scoped) {
@@ -533,8 +543,19 @@ public class Main : Photon.MonoBehaviour {
 		health -= dmg;
 		if (health < 0) {
 			if (photonView.isMine) {
-				GameObject.Find ("_Manager").GetComponent<Manager> ().loading.SetActive (true);
-				PhotonNetwork.Destroy (this.gameObject);
+				//GameObject.Find ("_Manager").GetComponent<Manager> ().loading.SetActive (true);
+				//PhotonNetwork.Destroy (this.gameObject);
+				canShoot = false;
+				controller.enabled = false;
+				cam.SetActive (false);
+				deathCam.SetActive (true);
+				ragdoll.SetActive (true);
+				gunDrop.SetActive (true);
+				respawnTimer = 5f;
+			} else {
+				modelAnim.gameObject.SetActive (false);
+				ragdoll.SetActive (true);
+				gunDrop.SetActive (true);
 			}
 		}
 	}

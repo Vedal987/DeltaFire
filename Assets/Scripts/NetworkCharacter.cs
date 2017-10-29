@@ -18,8 +18,8 @@ public class NetworkCharacter : Photon.MonoBehaviour {
 		if (photonView.isMine) {
 			
 		} else {
-			transform.position = Vector3.Lerp (transform.position, realPos, 0.4f);
-			transform.rotation = Quaternion.Lerp (transform.rotation, realRot, 0.4f);
+			transform.position = Vector3.Lerp (transform.position, realPos, Time.deltaTime * 15f);
+			transform.rotation = Quaternion.Lerp (transform.rotation, realRot, Time.deltaTime * 30f);
 		}
 	}
 
