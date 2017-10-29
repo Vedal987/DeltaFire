@@ -304,12 +304,14 @@ public class Main : Photon.MonoBehaviour {
 				}
 			}
 			CheckAnimation ();
-			if (scoped) {
-				pivot.GetComponent<Crosshair> ().showCrosshair = false;
-				Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
-			} else {
-				pivot.GetComponent<Crosshair> ().showCrosshair = true;
-				Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 60f, 0.09f);
+			if (health > 0) {
+				if (scoped) {
+					pivot.GetComponent<Crosshair> ().showCrosshair = false;
+					Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 40f, 0.09f);
+				} else {
+					pivot.GetComponent<Crosshair> ().showCrosshair = true;
+					Camera.main.fieldOfView = Mathf.Lerp (Camera.main.fieldOfView, 60f, 0.09f);
+				}
 			}
 			shootTimer -= Time.deltaTime;
 
