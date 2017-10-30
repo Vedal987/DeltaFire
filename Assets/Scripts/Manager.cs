@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Text.RegularExpressions;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +11,11 @@ using EZCameraShake;
 using UnityEngine.PostProcessing;
 
 public class Manager : Photon.MonoBehaviour {
+
+	public string currentGameMode;
+	public int kills;
+	public int deaths;
+	public int team;
 
 	public string GameVersion;
 	public GameObject[] SpawnPoints;
@@ -28,9 +35,24 @@ public class Manager : Photon.MonoBehaviour {
 
 	public InputField gameName;
 	public Dropdown mapSelector;
+	public Dropdown GameModeSelector;
 
-	public string[] possibleMaps;
-	public string[] mapName;
+	public GameObject RegisterUI;
+	public InputField RegisterUser;
+	public InputField RegisterPass;
+
+	public GameObject LogInUI;
+	public InputField LogInUser;
+	public InputField LogInPass;
+
+	public string[] possibleHardpointMaps;
+	public string[] HardpointMapName;
+
+	public string[] possibleFreeForAllMaps;
+	public string[] FreeForAllMapName;
+
+	public string[] possibleTeamDeathmatchMaps;
+	public string[] TeamDeathmatchMapName;
 
 	public Text LogText;
 	public InputField Command;
@@ -39,6 +61,10 @@ public class Manager : Photon.MonoBehaviour {
 	public bool isPlaying;
 
 	public GameObject Player;
+	public GameObject connectingUI;
+
+	public GameObject namePopUp;
+	public InputField name;
 
 	AsyncOperation asyncLoadLevel;
 
@@ -56,7 +82,48 @@ public class Manager : Photon.MonoBehaviour {
 		}
 	}
 
+	public void EnterName()
+	{
+		if (name.text != "") {
+			PhotonNetwork.player.NickName = name.text;
+			namePopUp.SetActive (false);
+			TitleScreen.SetActive (true);
+		}
+	}
 
+
+	public void LogIn()
+	{
+		string username = LogInUser.text;
+		string password = LogInPass.text;
+		if (username != "" && password != "") {
+
+		} else {
+			//boi
+		}
+	}
+
+	public void Register()
+	{
+		string username = RegisterUser.text;
+		string password = RegisterPass.text;
+		if (username != "" && password != "") {
+			
+		} else {
+			//boi
+		}
+	}
+
+	public void HasAccount()
+	{
+		LogInUI.SetActive (true);
+		RegisterUI.SetActive (false);
+	}
+	public void NoAccount()
+	{
+		LogInUI.SetActive (false);
+		RegisterUI.SetActive (true);
+	}
 		
 	public void RequestCommand(string com)
 	{
@@ -93,7 +160,7 @@ public class Manager : Photon.MonoBehaviour {
 					loading.SetActive (false);
 					isLoading = false;
 					SceneManager.LoadScene ("Menu");
-					GameObject.Destroy (this.gameObject);
+					GameObject.Destroy (GameObject.Find ("_Manager"));
 				}
 				if (com.StartsWith ("Quit")) {
 					Log ("Quitting Game...");
@@ -142,8 +209,19 @@ public class Manager : Photon.MonoBehaviour {
 		ad.PlayOneShot (UIClick);
 		Multiplayer.SetActive (false);
 		CreateRoom.SetActive (true);
+		mapSelector.AddOptions (new List<string>(possibleFreeForAllMaps));
+	}
+
+	public void GameModeChanged(int v)
+	{
 		mapSelector.ClearOptions ();
-		mapSelector.AddOptions (new List<string>(possibleMaps));
+		if (GameModeSelector.value == 0) {
+			mapSelector.AddOptions (new List<string>(possibleFreeForAllMaps));
+		} else if (GameModeSelector.value == 1) {
+			mapSelector.AddOptions (new List<string>(possibleHardpointMaps));
+		} else if (GameModeSelector.value == 2) {
+			mapSelector.AddOptions (new List<string>(possibleTeamDeathmatchMaps));
+		}
 		mapSelector.RefreshShownValue ();
 	}
 
@@ -154,7 +232,9 @@ public class Manager : Photon.MonoBehaviour {
 	void Start () 
 	{
 		ad = this.GetComponent<AudioSource> ();
+		connectingUI.SetActive (true);
 		Connect ();
+
 	}
 
 	void Update () 
@@ -200,11 +280,22 @@ public class Manager : Photon.MonoBehaviour {
 		//loadingStat = "TRYING TO JOIN ROOM";
 		//Log ("Trying To Join Room");
 		Log ("Connected To Server");
+		connectingUI.SetActive (false);
 	}
 
 	public void CreatePhotonRoom()
 	{
-		string name = mapName [mapSelector.value] + " " + gameName.text;
+		string roomDetails = "";
+		if (GameModeSelector.value == 0) {
+			roomDetails = FreeForAllMapName [mapSelector.value] + " FreeForAll ";
+		}
+		if (GameModeSelector.value == 1) {
+			roomDetails = HardpointMapName [mapSelector.value] + " Hardpoint ";
+		}
+		if (GameModeSelector.value == 2) {
+			roomDetails = TeamDeathmatchMapName [mapSelector.value] + " TeamDeathmatch ";
+		}
+		string name = roomDetails + " " + gameName.text;
 		foreach (RoomInfo info in PhotonNetwork.GetRoomList()) {
 			if (name == info.Name) {
 				Log ("A room with that name already exists. Please try again.");
@@ -232,6 +323,7 @@ public class Manager : Photon.MonoBehaviour {
 		char[] space = " ".ToCharArray();
 		string[] MapName = PhotonNetwork.room.Name.Split(space);
 		string map = MapName [0].TrimEnd (space [0]);
+		currentGameMode = MapName [1].TrimEnd (space [0]);
 		StartCoroutine (LoadScene (map));
 		PhotonNetwork.isMessageQueueRunning = false;
 	}
@@ -252,7 +344,7 @@ public class Manager : Photon.MonoBehaviour {
 		loadingStat = "SPAWNING PLAYER";
 		SpawnPoints = GameObject.FindGameObjectsWithTag ("Spawn");
 
-		Transform point = SpawnPoints [Random.Range (0, SpawnPoints.Length)].transform;
+		Transform point = SpawnPoints [UnityEngine.Random.Range (0, SpawnPoints.Length)].transform;
 		GameObject player = PhotonNetwork.Instantiate ("Player", point.position, Quaternion.identity, 0) as GameObject;
 		Player = player;
 		player.GetComponent<FirstPersonController> ().enabled = true;

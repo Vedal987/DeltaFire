@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/TestLabPlayer.unity
     guid: 3df049222bdbf524182cb5a9c9a0bdcb
   - enabled: 1
-    path: Assets/Scenes/HardPoint Map.unity
+    path: Assets/Scenes/HardPointMap.unity
     guid: 513f6f1911cc91941b862ab69def56fd
   - enabled: 1
-    path: Assets/Scenes/FreeForAll Map.unity
+    path: Assets/Scenes/FreeForAllMap.unity
     guid: 5224db312de1ba445b30b9ef775b48d6

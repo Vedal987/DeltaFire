@@ -166,6 +166,7 @@ public class Main : Photon.MonoBehaviour {
 		yield return new WaitForSeconds (0.04f);
 		modelMuzzleLight.SetActive (true);
 		modelMuzzleFlash.SetActive (true);
+		Instantiate (TracerRound, modelMuzzleLight.transform.position + spread, modelMuzzleLight.transform.localToWorldMatrix.rotation);
 		yield return new WaitForSeconds (0.11f);
 		modelMuzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
