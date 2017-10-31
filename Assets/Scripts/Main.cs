@@ -42,15 +42,7 @@ public class Main : Photon.MonoBehaviour {
 	public GameObject modelMuzzleFlash;
 
 	public GameObject TracerRound;
-
 	public GameObject bulletHole;
-	public GameObject glassImpact;
-	public GameObject woodImpact;
-	public GameObject metalImpact;
-	public GameObject groundImpact;
-	public GameObject brickImpact;
-	public GameObject waterImpact;
-	public GameObject bloodSplat;
 
 	public bool scoped;
 	public bool running;
@@ -493,40 +485,50 @@ public class Main : Photon.MonoBehaviour {
 		}
 	}
 
+	[PunRPC]
+	public void BulletHoleInst(string name, Quaternion hitRotation, Vector3 point)
+	{
+		GameObject hole = Instantiate(bulletHole, point, hitRotation) as GameObject;
+		hole.transform.SetParent (GameObject.Find(name).transform, true);
+	}
+
 	public void hasRaycast(RaycastHit hit)
 	{
 		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
 		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood" || hit.transform.tag == "Dirt" || hit.transform.tag == "Brick")
 		{
-			GameObject hole = Instantiate(bulletHole, hit.point, hitRotation) as GameObject;
-			hole.transform.SetParent (hit.transform, true);
+			PhotonView pv = transform.GetComponent<PhotonView> ();
+			//hit.transform.gameObject.name += Random.Range (0, 999999999);
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point);
+
+
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
-				PhotonView pv = hit.transform.GetComponent<PhotonView> ();
+				pv = hit.transform.GetComponent<PhotonView> ();
 				pv.RPC("ApplyDamage", PhotonTargets.AllBuffered, currentGun.GetComponent<GunProperties>().damage);
 			}
 		}
 		if (hit.transform.tag == "Glass") {
 			RaycastObject (hit);
-			Instantiate(glassImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("GlassImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Wood") {
 			RaycastObject (hit);
-			Instantiate(woodImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("WoodImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Dirt") {
-			Instantiate(groundImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("GroundImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Water") {
-			Instantiate(waterImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("WaterImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Brick") {
-			Instantiate(groundImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("GroundImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Metal") {
-			Instantiate(metalImpact, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("MetalImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Enemy") {
-			Instantiate(bloodSplat, hit.point, hitRotation);
+			PhotonNetwork.Instantiate("BloodSplat", hit.point, hitRotation, 0);
 			Headshot hs = hit.transform.GetComponent<Headshot>();
 			GameObject gm = hs.parent;
 			PhotonView pv = gm.GetComponent<PhotonView>();

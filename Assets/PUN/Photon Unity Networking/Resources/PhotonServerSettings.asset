@@ -41,4 +41,5 @@ MonoBehaviour:
   - Animate
   - ExecuteCommand
   - ExecuteNetworkLog
+  - BulletHoleInst
   DisableAutoOpenWizard: 1

@@ -249,7 +249,6 @@ public class Manager : Photon.MonoBehaviour {
 					Player.GetComponent<Main> ().canShoot = true;
 					Cursor.visible = false;
 					Cursor.lockState = CursorLockMode.Locked;
-					Player.transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject.GetComponent<WeaponSway> ().enabled = true;
 				}
 
 				console.SetActive (!console.activeSelf);
@@ -261,7 +260,6 @@ public class Manager : Photon.MonoBehaviour {
 				if (Player != null) {
 					Player.GetComponent<FirstPersonController> ().enabled = false;
 					Player.GetComponent<Main> ().canShoot = false;
-					Player.transform.GetChild (0).GetChild (0).GetChild (0).GetChild (0).gameObject.GetComponent<WeaponSway> ().enabled = false;
 				}
 			}
 		}
