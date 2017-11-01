@@ -12,7 +12,8 @@ using UnityEngine.PostProcessing;
 
 public class Manager : Photon.MonoBehaviour {
 
-	public string currentGameMode;
+	public string currentGamemode;
+
 	public int kills;
 	public int deaths;
 	public int team;
@@ -45,14 +46,19 @@ public class Manager : Photon.MonoBehaviour {
 	public InputField LogInUser;
 	public InputField LogInPass;
 
+	public GameObject ContentScroll;
+	public GameObject GamePrefab;
+
+	public GameObject currentSettings;
+
 	public string[] possibleHardpointMaps;
-	public string[] HardpointMapName;
+	public GameObject HardpointSettings;
 
 	public string[] possibleFreeForAllMaps;
-	public string[] FreeForAllMapName;
+	public GameObject FreeForAllSettings;
 
 	public string[] possibleTeamDeathmatchMaps;
-	public string[] TeamDeathmatchMapName;
+	public GameObject TeamDeathmatchSettings;
 
 	public Text LogText;
 	public InputField Command;
@@ -157,6 +163,7 @@ public class Manager : Photon.MonoBehaviour {
 				}
 				if (com.StartsWith ("Leave")) {
 					PhotonNetwork.LeaveRoom ();
+					PhotonNetwork.Disconnect ();
 					loading.SetActive (false);
 					isLoading = false;
 					SceneManager.LoadScene ("Menu");
@@ -185,6 +192,7 @@ public class Manager : Photon.MonoBehaviour {
 		}
 		Multiplayer.SetActive (false);
 		CreateRoom.SetActive (false);
+		CancelInvoke ();
 	}
 	public void Quit()
 	{
@@ -197,7 +205,26 @@ public class Manager : Photon.MonoBehaviour {
 		ad.PlayOneShot (UIClick);
 		TitleScreen.SetActive (false);
 		Multiplayer.SetActive (true);
+		InvokeRepeating ("RefreshServerList", 0f, 3f);
 	}
+
+	public void RefreshServerList()
+	{
+		for(int i = 0; i < ContentScroll.transform.GetChildCount(); i++)
+		{
+			GameObject.Destroy(ContentScroll.transform.GetChild(i).gameObject);
+		}
+		foreach (RoomInfo room in PhotonNetwork.GetRoomList()) {
+			GameObject GameGo = Instantiate (GamePrefab, ContentScroll.transform);
+			GameGo.transform.GetChild (0).GetComponent<Text> ().text = room.Name;
+			GameGo.transform.GetChild (1).GetComponent<Text> ().text = (string)room.CustomProperties ["Gamemode"];
+			GameGo.transform.GetChild (2).GetComponent<Text> ().text = (string)room.CustomProperties ["Map"];
+			GameGo.transform.GetChild (3).GetComponent<Text> ().text = room.PlayerCount + "/" + room.MaxPlayers;
+			GameGo.GetComponent<Button>().onClick.AddListener(delegate {JoinRoom(GameGo.transform.GetChild (0).gameObject);});
+
+		}
+	}
+
 	public void OptionsMenu()
 	{
 		ad.PlayOneShot (UIClick);
@@ -210,6 +237,8 @@ public class Manager : Photon.MonoBehaviour {
 		Multiplayer.SetActive (false);
 		CreateRoom.SetActive (true);
 		mapSelector.AddOptions (new List<string>(possibleFreeForAllMaps));
+		CancelInvoke ();
+		GameModeChanged (0);
 	}
 
 	public void GameModeChanged(int v)
@@ -217,10 +246,22 @@ public class Manager : Photon.MonoBehaviour {
 		mapSelector.ClearOptions ();
 		if (GameModeSelector.value == 0) {
 			mapSelector.AddOptions (new List<string>(possibleFreeForAllMaps));
+			FreeForAllSettings.SetActive (true);
+			HardpointSettings.SetActive (false);
+			TeamDeathmatchSettings.SetActive (false);
+			currentSettings = FreeForAllSettings;
 		} else if (GameModeSelector.value == 1) {
 			mapSelector.AddOptions (new List<string>(possibleHardpointMaps));
+			FreeForAllSettings.SetActive (false);
+			HardpointSettings.SetActive (true);
+			TeamDeathmatchSettings.SetActive (false);
+			currentSettings = HardpointSettings;
 		} else if (GameModeSelector.value == 2) {
 			mapSelector.AddOptions (new List<string>(possibleTeamDeathmatchMaps));
+			FreeForAllSettings.SetActive (false);
+			HardpointSettings.SetActive (false);
+			TeamDeathmatchSettings.SetActive (true);
+			currentSettings = TeamDeathmatchSettings;
 		}
 		mapSelector.RefreshShownValue ();
 	}
@@ -237,10 +278,13 @@ public class Manager : Photon.MonoBehaviour {
 
 	}
 
-	void Update () 
+	void Update ()                                
 	{
 		if (isLoading) {
 			loadingStatusText.GetComponent<Text> ().text = loadingStat;
+		}
+		if (kills >= (int)PhotonNetwork.room.CustomProperties ["KillsToWin"] && currentGamemode == "FreeForAll") {
+			Log ("You won");
 		}
 		if (Input.GetKeyDown (KeyCode.BackQuote)) {
 			if (console.activeSelf) {
@@ -283,29 +327,64 @@ public class Manager : Photon.MonoBehaviour {
 
 	public void CreatePhotonRoom()
 	{
-		string roomDetails = "";
-		if (GameModeSelector.value == 0) {
-			roomDetails = FreeForAllMapName [mapSelector.value] + " FreeForAll ";
-		}
-		if (GameModeSelector.value == 1) {
-			roomDetails = HardpointMapName [mapSelector.value] + " Hardpoint ";
-		}
-		if (GameModeSelector.value == 2) {
-			roomDetails = TeamDeathmatchMapName [mapSelector.value] + " TeamDeathmatch ";
-		}
-		string name = roomDetails + " " + gameName.text;
-		foreach (RoomInfo info in PhotonNetwork.GetRoomList()) {
-			if (name == info.Name) {
-				Log ("A room with that name already exists. Please try again.");
-				return;
+		if (currentSettings.transform.GetChild (0).GetComponent<InputField> ().text != "0" && currentSettings.transform.GetChild (0).GetComponent<InputField> ().text != "" && Convert.ToInt32(currentSettings.transform.GetChild (0).GetComponent<InputField> ().text) <= 10) {
+			if (currentSettings.transform.GetChild (1).GetComponent<InputField> ().text != "0" && currentSettings.transform.GetChild (1).GetComponent<InputField> ().text != "" && Convert.ToInt32(currentSettings.transform.GetChild (1).GetComponent<InputField> ().text) <= Convert.ToInt32(currentSettings.transform.GetChild (1).GetComponent<InputField> ().placeholder.GetComponent<Text> ().text)) {
+
+				RoomOptions roomOptions = new RoomOptions ();
+				roomOptions.MaxPlayers = Convert.ToByte(Convert.ToInt32 (currentSettings.transform.GetChild (0).GetComponent<InputField> ().text));
+				roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable ();
+
+				string mapName = "";
+				string gamemode = "";
+				if (GameModeSelector.value == 0) {
+					mapName = possibleFreeForAllMaps [mapSelector.value];
+					gamemode = "FreeForAll";
+					roomOptions.CustomRoomProperties.Add ("KillsToWin", Convert.ToInt32 (currentSettings.transform.GetChild (1).GetComponent<InputField> ().text));
+				}
+				if (GameModeSelector.value == 1) {
+					mapName = possibleHardpointMaps [mapSelector.value];
+					gamemode = "Hardpoint";
+					roomOptions.CustomRoomProperties.Add ("PointsToWin", Convert.ToInt32 (currentSettings.transform.GetChild (1).GetComponent<InputField> ().text));
+					roomOptions.CustomRoomProperties.Add ("AlphaPoints", 0);
+					roomOptions.CustomRoomProperties.Add ("BetaPoints", 0);
+				}
+				if (GameModeSelector.value == 2) {
+					mapName = possibleTeamDeathmatchMaps [mapSelector.value];
+					gamemode = "TeamDeathmatch";
+					roomOptions.CustomRoomProperties.Add ("KillsToWin", Convert.ToInt32 (currentSettings.transform.GetChild (1).GetComponent<InputField> ().text));
+					roomOptions.CustomRoomProperties.Add ("AlphaKills", 0);
+					roomOptions.CustomRoomProperties.Add ("BetaKills", 0);
+				}
+				string name = gameName.text;
+				foreach (RoomInfo info in PhotonNetwork.GetRoomList()) {
+					if (name == info.Name) {
+						Log ("A room with that name already exists. Please try again.");
+						return;
+					}
+				}
+				loading.SetActive (true);
+				isLoading = true;
+				loadingStat = "CREATING ROOM";
+				Log ("Creating Room");
+
+
+				roomOptions.CustomRoomProperties.Add ("Map", mapName);
+				roomOptions.CustomRoomProperties.Add ("Gamemode", gamemode);
+
+				roomOptions.CustomRoomPropertiesForLobby = new string[] {"Map", "Gamemode"};
+				PhotonNetwork.CreateRoom(name, roomOptions, TypedLobby.Default);
 			}
 		}
+	}
+		
+	public void JoinRoom(GameObject GameName)
+	{
+		CancelInvoke ();
+		Log ("Joining Room");
+		loadingStat = "JOINING ROOM";
+		PhotonNetwork.JoinRoom (GameName.GetComponent<Text> ().text);
 		loading.SetActive (true);
 		isLoading = true;
-		loadingStat = "CREATING ROOM";
-		Log ("Creating Room");
-		PhotonNetwork.CreateRoom (name) ;
-
 	}
 
 	void OnPhotonRandomJoinFailed()
@@ -318,10 +397,9 @@ public class Manager : Photon.MonoBehaviour {
 	void OnJoinedRoom()
 	{
 		loadingStat = "ROOM JOINED, LOADING SCENE";
-		char[] space = " ".ToCharArray();
-		string[] MapName = PhotonNetwork.room.Name.Split(space);
-		string map = MapName [0].TrimEnd (space [0]);
-		currentGameMode = MapName [1].TrimEnd (space [0]);
+		currentGamemode = (string)PhotonNetwork.room.CustomProperties ["Gamemode"];
+		string map = "";
+		map = (string)PhotonNetwork.room.CustomProperties ["Map"];
 		StartCoroutine (LoadScene (map));
 		PhotonNetwork.isMessageQueueRunning = false;
 	}
@@ -345,20 +423,19 @@ public class Manager : Photon.MonoBehaviour {
 		Transform point = SpawnPoints [UnityEngine.Random.Range (0, SpawnPoints.Length)].transform;
 		GameObject player = PhotonNetwork.Instantiate ("Player", point.position, Quaternion.identity, 0) as GameObject;
 		Player = player;
+
 		player.GetComponent<FirstPersonController> ().enabled = true;
 		player.GetComponent<CharacterController> ().enabled = true;
 		player.GetComponent<CapsuleCollider> ().enabled = false;
 		player.transform.tag = "Player";
-		player.transform.GetChild (1).transform.GetChild(0).GetComponent<SkinnedMeshRenderer> ().enabled = false;
-		player.transform.GetChild (0).gameObject.GetComponent<CameraShaker> ().enabled = true;
-		GameObject cam = player.transform.GetChild (0).GetChild (0).gameObject;
-		cam.GetComponent<Camera> ().enabled = true;
-		cam.GetComponent<AudioListener> ().enabled = true;
+		player.transform.GetChild (1).GetChild(0).GetComponent<SkinnedMeshRenderer> ().enabled = false;
+		player.transform.GetChild (0).gameObject.SetActive (true);
+
 		if (!isImageEffectsEnabled) {
-			cam.GetComponent<PostProcessingBehaviour> ().enabled = false;
+			player.transform.GetChild (0).GetChild (0).GetComponent<PostProcessingBehaviour> ().enabled = false;
 		}
+
 		loading.SetActive (false);
-		cam.transform.GetChild (0).gameObject.SetActive (true);
 		isPlaying = true;
 		Log ("Player Spawned");
 		NetworkLog("New Player Joined!");

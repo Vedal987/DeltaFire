@@ -42,4 +42,6 @@ MonoBehaviour:
   - ExecuteCommand
   - ExecuteNetworkLog
   - BulletHoleInst
+  - Kill
+  - HealthRegen
   DisableAutoOpenWizard: 1

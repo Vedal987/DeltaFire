@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114989573803761486}
   - component: {fileID: 114850724322959304}
   m_Layer: 0
-  m_Name: DirtImpact
+  m_Name: GroundImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -272,7 +272,8 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
