@@ -284,7 +284,7 @@ public class Manager : Photon.MonoBehaviour {
 			loadingStatusText.GetComponent<Text> ().text = loadingStat;
 		}
 		if (currentGamemode == "FreeForAll") {
-			if (kills >= (int)PhotonNetwork.room.CustomProperties ["KillsToWin"]) {
+			if (kills == (int)PhotonNetwork.room.CustomProperties ["KillsToWin"]) {
 				Log ("You won");
 			}
 		}

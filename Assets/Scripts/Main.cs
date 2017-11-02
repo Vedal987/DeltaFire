@@ -628,14 +628,14 @@ public class Main : Photon.MonoBehaviour {
 			PhotonNetwork.Instantiate("MetalImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Enemy") {
-			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Flesh");
+			//pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Flesh");
 			PhotonNetwork.Instantiate("BloodSplat", hit.point, hitRotation, 0);
 			Headshot hs = hit.transform.GetComponent<Headshot>();
 			if (hs != null) {
 				GameObject gm = hs.parent;
 				PhotonView pv2 = gm.GetComponent<PhotonView> ();
 				int dmg = Mathf.RoundToInt (currentGun.GetComponent<GunProperties> ().damage * hit.transform.GetComponent<Headshot> ().multiplier);
-				pv.RPC ("ApplyDamage", PhotonTargets.AllBuffered, dmg, photonView.ownerId);
+				pv2.RPC ("ApplyDamage", PhotonTargets.AllBuffered, dmg, photonView.ownerId);
 				RaycastObject (hit);
 			}
 		}
@@ -686,7 +686,7 @@ public class Main : Photon.MonoBehaviour {
 				regen = true;
 			}
 		}
-		if (health < 0) {
+		if (health <= 0) {
 			if (photonView.isMine) {
 				hb.enabled = false;
 				scoped = false;
