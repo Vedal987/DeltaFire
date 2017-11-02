@@ -63,7 +63,7 @@ namespace UnityStandardAssets.Effects
         {
             pos += normal*0.5f;
             Transform fire = (Transform) Instantiate(firePrefab, pos, Quaternion.identity);
-            fire.parent = t;
+			fire.SetParent (t, true);
         }
     }
 }

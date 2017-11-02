@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitpoints: 10
   spawnobject: {fileID: 474456, guid: 222e57d22f6c85944ba9250b8d3fd4a0, type: 2}
-  explosion: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
+  explosion: {fileID: 1845523589896586, guid: 1fa6881312731754fbacdbf8bf8cb251, type: 2}
   radius: 3
   power: 100
 --- !u!1001 &100100000

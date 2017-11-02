@@ -967,7 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b8d94b6580f0b48bf9532f9d2fdcbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameMode: 
+  currentGamemode: 
   kills: 0
   deaths: 0
   team: 0
@@ -992,12 +992,23 @@ MonoBehaviour:
   LogInUI: {fileID: 0}
   LogInUser: {fileID: 0}
   LogInPass: {fileID: 0}
-  possibleHardpointMaps: []
-  HardpointMapName: []
-  possibleFreeForAllMaps: []
-  FreeForAllMapName: []
-  possibleTeamDeathmatchMaps: []
-  TeamDeathmatchMapName: []
+  ContentScroll: {fileID: 0}
+  GamePrefab: {fileID: 1665056450984536, guid: 9b8b778aaca779e41ae92d12391e3b7a, type: 2}
+  currentSettings: {fileID: 0}
+  possibleHardpointMaps:
+  - Prison
+  HardpointSettings: {fileID: 0}
+  possibleFreeForAllMaps:
+  - Test Lab
+  - Field
+  - Prison
+  - Prototype
+  FreeForAllSettings: {fileID: 0}
+  possibleTeamDeathmatchMaps:
+  - Prison
+  - Field
+  - Prototype
+  TeamDeathmatchSettings: {fileID: 0}
   LogText: {fileID: 114456562363881134}
   Command: {fileID: 114536246095309010}
   console: {fileID: 1762622867518962}

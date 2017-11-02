@@ -37,13 +37,17 @@ public class Main : Photon.MonoBehaviour {
 	public GameObject gunDrop;
 	public GameObject deathCam;
 
-	public GameObject muzzleLight;
-	public GameObject muzzleFlash;
 	public GameObject modelMuzzleLight;
 	public GameObject modelMuzzleFlash;
 
 	public GameObject TracerRound;
-	public GameObject bulletHole;
+	public GameObject woodDecal;
+	public GameObject stoneDecal;
+	public GameObject brickDecal;
+	public GameObject metalDecal;
+	public GameObject dirtDecal;
+	public GameObject glassDecal;
+	public GameObject fleshDecal;
 
 	public bool scoped;
 	public bool running;
@@ -412,7 +416,7 @@ public class Main : Photon.MonoBehaviour {
 					}
 				}
 
-				if (!reloading && shootTimer < 0) {
+				if (!reloading && shootTimer < 0 && currentGun.GetComponent<GunProperties>().mags > 0) {
 					if (Input.GetKeyDown (KeyCode.R)) {
 						StartCoroutine (Reload ());
 					}
@@ -492,7 +496,11 @@ public class Main : Photon.MonoBehaviour {
 			ad.PlayOneShot (magBolt);
 			yield return new WaitForSeconds (0.2f);
 			currentGun.GetComponent<GunProperties>().mags--;
-			currentGun.GetComponent<GunProperties>().ammoInMag = currentGun.GetComponent<GunProperties>().ammoPerMag;
+			if (currentGun.GetComponent<GunProperties> ().ammoInMag > 0) {
+				currentGun.GetComponent<GunProperties> ().ammoInMag = currentGun.GetComponent<GunProperties> ().ammoPerMag + 1;
+			} else {
+				currentGun.GetComponent<GunProperties> ().ammoInMag = currentGun.GetComponent<GunProperties> ().ammoPerMag;
+			}
 			reloading = false;
 			yield return new WaitForSeconds (0.2f);
 			if (remScoped) {
@@ -516,27 +524,26 @@ public class Main : Photon.MonoBehaviour {
 		yield return new WaitForSeconds (0.08f);
 		Raycast ();
 		currentGun.GetComponent<GunProperties>().ammoInMag = currentGun.GetComponent<GunProperties>().ammoInMag - 1;
-		muzzleLight.SetActive (true);
-		muzzleFlash.SetActive (true);
+		currentGun.GetComponent<GunProperties>().muzzleLight.SetActive (true);
+		Instantiate (currentGun.GetComponent<GunProperties> ().muzzleFlash, currentGun.GetComponent<GunProperties> ().muzzleLight.transform.position, Quaternion.identity);
 		yield return new WaitForSeconds (0.11f);
-		muzzleLight.SetActive (false);
+		currentGun.GetComponent<GunProperties>().muzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
-		muzzleFlash.SetActive (false);
 		photonView.RPC ("Animate", PhotonTargets.AllBuffered, "stopFire");
 	}
 
 	public void Raycast() {
 		RaycastHit hit;
-		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
+		Vector3 direction = currentGun.GetComponent<GunProperties>().muzzleLight.transform.TransformDirection(Vector3.forward);
 		bulletSpreadX = Random.Range(-0.01f, 0.01f);
 		bulletSpreadY = Random.Range(-0.01f, 0.01f);
 		if (scoped) {
 			bulletSpreadX = 0;
 			bulletSpreadY = 0;
 		}
-		Instantiate (TracerRound, muzzleLight.transform.position + spread, cam.transform.rotation);
+		Instantiate (TracerRound, currentGun.GetComponent<GunProperties>().muzzleLight.transform.position + spread, cam.transform.rotation);
 		spread = new Vector3 (bulletSpreadX, bulletSpreadY, 0);
-		if (Physics.Raycast (muzzleLight.transform.position + spread, direction, out hit, distanceFired)) {
+		if (Physics.Raycast (currentGun.GetComponent<GunProperties>().muzzleLight.transform.position + spread, direction, out hit, distanceFired)) {
 			hasRaycast (hit);
 		}
 	}
@@ -544,7 +551,7 @@ public class Main : Photon.MonoBehaviour {
 	public void RaycastObject(RaycastHit penetrated) {
 		timesPenetrated++;
 		RaycastHit hit;
-		Vector3 direction = muzzleLight.transform.TransformDirection(Vector3.forward);
+		Vector3 direction = currentGun.GetComponent<GunProperties>().muzzleLight.transform.TransformDirection(Vector3.forward);
 		if (Physics.Raycast (penetrated.point, direction, out hit, 50) && timesPenetrated < 3) {
 			hasRaycast (hit);
 		} else {
@@ -553,58 +560,86 @@ public class Main : Photon.MonoBehaviour {
 	}
 
 	[PunRPC]
-	public void BulletHoleInst(string name, Quaternion hitRotation, Vector3 point)
+	public void BulletHoleInst(string name, Quaternion hitRotation, Vector3 point, string decal)
 	{
-		GameObject hole = Instantiate(bulletHole, point, hitRotation) as GameObject;
-		hole.transform.SetParent (GameObject.Find(name).transform, true);
+		GameObject hole = null;
+		if (decal == "Glass") {
+			hole = Instantiate (glassDecal, point, hitRotation) as GameObject;
+		}
+		if (decal == "Wood") {
+			hole = Instantiate (woodDecal, point, hitRotation) as GameObject;
+		}
+		if (decal == "Dirt") {
+			hole = Instantiate (dirtDecal, point, hitRotation) as GameObject;
+		}
+		if (decal == "Brick") {
+			hole = Instantiate (brickDecal, point, hitRotation) as GameObject;
+		}
+		if (decal == "Metal") {
+			hole = Instantiate (metalDecal, point, hitRotation) as GameObject;
+		}
+		if (decal == "Flesh") {
+			hole = Instantiate (fleshDecal, point, hitRotation) as GameObject;
+		}
+		if (hole != null) {
+			hole.transform.SetParent (GameObject.Find (name).transform, true);
+		}
 	}
 
 	public void hasRaycast(RaycastHit hit)
 	{
 		var hitRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+		PhotonView pv;
 		if(hit.transform.tag == "Metal" || hit.transform.tag == "Glass" || hit.transform.tag == "Wood" || hit.transform.tag == "Dirt" || hit.transform.tag == "Brick")
 		{
-			PhotonView pv = transform.GetComponent<PhotonView> ();
 			//hit.transform.gameObject.name += Random.Range (0, 999999999);
-			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point);
-
 
 			if (hit.transform.gameObject.GetComponent<explosive> ()) {
 				pv = hit.transform.GetComponent<PhotonView> ();
 				pv.RPC("ApplyDamage", PhotonTargets.AllBuffered, currentGun.GetComponent<GunProperties>().damage);
 			}
 		}
+		pv = transform.GetComponent<PhotonView> ();
 		if (hit.transform.tag == "Glass") {
 			RaycastObject (hit);
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Glass");
 			PhotonNetwork.Instantiate("GlassImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Wood") {
 			RaycastObject (hit);
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Wood");
 			PhotonNetwork.Instantiate("WoodImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Dirt") {
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Dirt");
 			PhotonNetwork.Instantiate("GroundImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Water") {
+			//pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Water");
 			PhotonNetwork.Instantiate("WaterImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Brick") {
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Brick");
 			PhotonNetwork.Instantiate("GroundImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Metal") {
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Metal");
 			PhotonNetwork.Instantiate("MetalImpact", hit.point, hitRotation, 0);
 		}
 		if (hit.transform.tag == "Enemy") {
+			pv.RPC ("BulletHoleInst", PhotonTargets.All, hit.transform.gameObject.name, hitRotation, hit.point, "Flesh");
 			PhotonNetwork.Instantiate("BloodSplat", hit.point, hitRotation, 0);
 			Headshot hs = hit.transform.GetComponent<Headshot>();
-			GameObject gm = hs.parent;
-			PhotonView pv = gm.GetComponent<PhotonView>();
-			int dmg = Mathf.RoundToInt(currentGun.GetComponent<GunProperties>().damage * hit.transform.GetComponent<Headshot> ().multiplier);
-			pv.RPC("ApplyDamage", PhotonTargets.AllBuffered, dmg, photonView.ownerId);
-			RaycastObject (hit);
+			if (hs != null) {
+				GameObject gm = hs.parent;
+				PhotonView pv2 = gm.GetComponent<PhotonView> ();
+				int dmg = Mathf.RoundToInt (currentGun.GetComponent<GunProperties> ().damage * hit.transform.GetComponent<Headshot> ().multiplier);
+				pv.RPC ("ApplyDamage", PhotonTargets.AllBuffered, dmg, photonView.ownerId);
+				RaycastObject (hit);
+			}
 		}
 		if (hit.transform.gameObject.GetComponent<Rigidbody> ()) {
-			hit.transform.gameObject.GetComponent<Rigidbody> ().AddForce(muzzleLight.transform.forward * 500);
+			hit.transform.gameObject.GetComponent<Rigidbody> ().AddForce(currentGun.GetComponent<GunProperties>().muzzleLight.transform.forward * 200);
 		}
 		//StartCoroutine (SFX (hit));
 	}
@@ -663,6 +698,7 @@ public class Main : Photon.MonoBehaviour {
 				deathCam.SetActive (true);
 				ragdoll.SetActive (true);
 				gunDrop.SetActive (true);
+				modelAnim.gameObject.SetActive (false);
 				respawnTimer = 5f;
 			} else {
 				modelAnim.gameObject.SetActive (false);

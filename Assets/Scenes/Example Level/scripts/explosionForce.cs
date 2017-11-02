@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Photon;
 using System.Collections;
 using EZCameraShake;
 
-public class explosionForce : MonoBehaviour {
+public class explosionForce : Photon.MonoBehaviour {
 	public float radius = 5.0f;
 	public float power = 200.0f;
 	public float waitTime = 5.0f;
@@ -35,7 +36,11 @@ public class explosionForce : MonoBehaviour {
 
 			}
 
-			hit.transform.SendMessageUpwards ("ApplyDamage",damage, SendMessageOptions.DontRequireReceiver);
+			if (hit.tag == "Player") {
+				photonView.RPC ("ApplyDamage", PhotonTargets.AllBuffered, damage, photonView.ownerId);
+			} else {
+				hit.transform.SendMessageUpwards ("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+			}
 		}
 	
 	}
