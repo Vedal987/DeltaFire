@@ -12,5 +12,6 @@ public class GunProperties : MonoBehaviour {
 	public AudioClip shoot;
 	public GameObject muzzleLight;
 	public GameObject muzzleFlash;
+	public GameObject shellEject;
 	public float maxDistance;
 }

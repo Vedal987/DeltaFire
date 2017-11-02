@@ -526,6 +526,7 @@ public class Main : Photon.MonoBehaviour {
 		currentGun.GetComponent<GunProperties>().ammoInMag = currentGun.GetComponent<GunProperties>().ammoInMag - 1;
 		currentGun.GetComponent<GunProperties>().muzzleLight.SetActive (true);
 		Instantiate (currentGun.GetComponent<GunProperties> ().muzzleFlash, currentGun.GetComponent<GunProperties> ().muzzleLight.transform.position, Quaternion.identity);
+		currentGun.GetComponent<GunProperties> ().shellEject.GetComponent<ParticleSystem> ().Play (true);
 		yield return new WaitForSeconds (0.11f);
 		currentGun.GetComponent<GunProperties>().muzzleLight.SetActive (false);
 		yield return new WaitForSeconds (0.04f);
