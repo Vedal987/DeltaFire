@@ -9,16 +9,13 @@ using Photon;
 public class Main : Photon.MonoBehaviour {
 	bool remScoped;
 
-	public GameObject manager;
-	public FirstPersonController controller;
+
 
 	public int health;
 	public int maxHealth;
 
 
-	AudioSource ad;
-	public AudioSource ad2;
-	public AudioSource hb;
+
 
 	public AudioClip magIn;
 	public AudioClip magOut;
@@ -27,6 +24,12 @@ public class Main : Photon.MonoBehaviour {
 	public float shootTimer;
 	public bool reloading;
 
+	[Header("References")]
+	public GameObject manager;
+	public FirstPersonController controller;
+	AudioSource ad;
+	public AudioSource ad2;
+	public AudioSource hb;
 	public GameObject currentGun;
 	public int gunIndex;
 	public GameObject[] guns;
@@ -37,8 +40,11 @@ public class Main : Photon.MonoBehaviour {
 	public GameObject gunDrop;
 	public GameObject deathCam;
 
+	[Header("Gun Effects")]
 	public GameObject modelMuzzleLight;
 	public GameObject modelMuzzleFlash;
+
+
 
 	public GameObject TracerRound;
 	public GameObject woodDecal;
@@ -424,12 +430,14 @@ public class Main : Photon.MonoBehaviour {
 
 				if (!reloading && shootTimer < 0 && !running) {
 					if (Input.GetButtonDown ("Fire1")  || wantsToShoot) {
-						if (currentGun.GetComponent<GunProperties>().ammoInMag > 0) {
-							shootTimer = currentGun.GetComponent<GunProperties>().timeBetweenShots;
+						if (currentGun.GetComponent<GunProperties> ().ammoInMag > 0) {
+							shootTimer = currentGun.GetComponent<GunProperties> ().timeBetweenShots;
 							StartCoroutine (Shoot ());
 							photonView.RPC ("Animate", PhotonTargets.AllBuffered, "startFire");
-						} else {
+						} else if (currentGun.GetComponent<GunProperties> ().mags > 0) {
 							StartCoroutine (Reload ());
+						} else {
+							
 						}
 					}
 
@@ -517,7 +525,7 @@ public class Main : Photon.MonoBehaviour {
 
 	public IEnumerator Shoot()
 	{
-		cam.transform.parent.GetComponent<ShakeCamera> ().GunShake ();
+		cam.transform.parent.GetComponent<ShakeCamera> ().GunShake (currentGun.GetComponent<GunProperties>().a, currentGun.GetComponent<GunProperties>().b, currentGun.GetComponent<GunProperties>().c, currentGun.GetComponent<GunProperties>().d);
 		currentGun.GetComponent<Animator>().SetTrigger ("Fire");
 		yield return new WaitForSeconds (0.01f);
 		ad.PlayOneShot (currentGun.GetComponent<GunProperties>().shoot);
@@ -680,7 +688,7 @@ public class Main : Photon.MonoBehaviour {
 	{
 		health -= dmg;
 		if (photonView.isMine) {
-			cam.transform.parent.GetComponent<ShakeCamera> ().GunShake ();
+			cam.transform.parent.GetComponent<ShakeCamera> ().GunShake (3f, 1f, 0.4f, 0.4f);
 			if (!regen) {
 				InvokeRepeating ("InitHealthRegen", 10f, 7f);
 				regen = true;

@@ -5109,7 +5109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029732695063962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.9148126, y: 4.6452613, z: 6.07489}
+  m_LocalPosition: {x: 13.700866, y: 11.304041, z: -20.582962}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4020617908490344}
@@ -10479,17 +10479,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a58da0bc31fa5419c840eb32bc6eb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  controller: {fileID: 114260945557989440}
   health: 100
   maxHealth: 100
-  ad2: {fileID: 82401095720828266}
-  hb: {fileID: 82527817553342980}
   magIn: {fileID: 8300000, guid: 225674432d87b9d46b5b142312f374e9, type: 3}
   magOut: {fileID: 8300000, guid: 3c1ccb7601cf6354c8756ed27cf955c0, type: 3}
   magBolt: {fileID: 8300000, guid: 0c15da1789d77dc4288d8adb61c3b165, type: 3}
   shootTimer: 0
   reloading: 0
+  manager: {fileID: 0}
+  controller: {fileID: 114260945557989440}
+  ad2: {fileID: 82401095720828266}
+  hb: {fileID: 82527817553342980}
   currentGun: {fileID: 1542414504527290}
   gunIndex: 2
   guns:
@@ -10807,6 +10807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66786d90af0dfbb488a508771f27aa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: M4A1
   damage: 8
   ammoPerMag: 30
   ammoInMag: 30
@@ -10819,6 +10820,10 @@ MonoBehaviour:
     type: 2}
   shellEject: {fileID: 1168490562111560}
   maxDistance: 9000
+  a: 1.8
+  b: 1.4
+  c: 0.01
+  d: 0.4
 --- !u!114 &114601703618287616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10830,6 +10835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66786d90af0dfbb488a508771f27aa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Galil
   damage: 10
   ammoPerMag: 25
   ammoInMag: 25
@@ -10842,6 +10848,10 @@ MonoBehaviour:
     type: 2}
   shellEject: {fileID: 1189865306304484}
   maxDistance: 9000
+  a: 1.6
+  b: 1.4
+  c: 0.01
+  d: 0.4
 --- !u!114 &114858730550961306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10853,6 +10863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66786d90af0dfbb488a508771f27aa43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: Desert Eagle
   damage: 15
   ammoPerMag: 8
   ammoInMag: 8
@@ -10865,6 +10876,10 @@ MonoBehaviour:
     type: 2}
   shellEject: {fileID: 1455806406590748}
   maxDistance: 9000
+  a: 3
+  b: 3
+  c: 0.01
+  d: 0.4
 --- !u!114 &114910595807910320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -45828,7 +45843,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643807819201502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -6.55669}
+  m_LocalPosition: {x: 0, y: 0, z: 22.055145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224614092057119890}

@@ -9,9 +9,9 @@ public class ShakeCamera : MonoBehaviour {
 
 	CameraShakeInstance c;
 
-	public void GunShake()
+	public void GunShake(float a, float b, float c, float d)
 	{
-		CameraShaker.Instance.ShakeOnce (1f, 1f, 0.2f, 0.3f);
+		CameraShaker.Instance.ShakeOnce (a, b, c, d);
 	}
 
 

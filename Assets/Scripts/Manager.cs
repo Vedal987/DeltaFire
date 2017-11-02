@@ -24,6 +24,15 @@ public class Manager : Photon.MonoBehaviour {
 	public GameObject loadingStatusText;
 	private string loadingStat = "LOADING SCENE";
 	public bool isLoading;
+
+	public bool isPlaying;
+
+	public GameObject Player;
+
+
+	AsyncOperation asyncLoadLevel;
+
+	[Header("UI")]
 	public GameObject TitleScreen;
 	public GameObject Options;
 	public GameObject Multiplayer;
@@ -63,16 +72,12 @@ public class Manager : Photon.MonoBehaviour {
 	public Text LogText;
 	public InputField Command;
 	public GameObject console;
-
-	public bool isPlaying;
-
-	public GameObject Player;
 	public GameObject connectingUI;
 
 	public GameObject namePopUp;
 	public InputField name;
 
-	AsyncOperation asyncLoadLevel;
+
 
 	public void Log(string m)
 	{

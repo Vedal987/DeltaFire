@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GunProperties : MonoBehaviour {
+	public string name;
+	[Header("Stats")]
 	public int damage;
 	public int ammoPerMag;
 	public int ammoInMag;
@@ -14,4 +16,9 @@ public class GunProperties : MonoBehaviour {
 	public GameObject muzzleFlash;
 	public GameObject shellEject;
 	public float maxDistance;
+	[Header("Gun Shake Properties")]
+	public float a;
+	public float b;
+	public float c;
+	public float d;
 }
