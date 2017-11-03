@@ -24,11 +24,16 @@ public class Main : Photon.MonoBehaviour {
 	public float shootTimer;
 	public bool reloading;
 
+	public AudioClip[] gravelFootsteps;
+	public AudioClip[] metalFootsteps;
+	public AudioClip[] woodFootsteps;
+
 	[Header("References")]
 	public GameObject manager;
 	public FirstPersonController controller;
 	AudioSource ad;
 	public AudioSource ad2;
+	public AudioSource fsAudio;
 	public AudioSource hb;
 	public GameObject currentGun;
 	public int gunIndex;
@@ -78,6 +83,7 @@ public class Main : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		fsAudio = this.GetComponent<AudioSource> ();
 		ad = currentGun.GetComponent<AudioSource> ();
 		if (photonView.isMine) {
 			manager = GameObject.FindGameObjectWithTag ("Manager");
@@ -95,6 +101,27 @@ public class Main : Photon.MonoBehaviour {
 		currentGun.SetActive (true);
 		yield return new WaitForSeconds (0.4f);
 		canShoot = true;
+	}
+
+	public void CallFootsteps()
+	{
+		photonView.RPC ("FootstepCycle", PhotonTargets.All);
+	}
+
+	[PunRPC]
+	public void FootstepCycle()
+	{
+		if (!this.GetComponent<CharacterController>().isGrounded)
+		{
+			return;
+		}
+
+		int n = Random.Range(1, gravelFootsteps.Length);
+		fsAudio.clip = gravelFootsteps[n];
+		fsAudio.PlayOneShot(fsAudio.clip);
+
+		gravelFootsteps[n] = gravelFootsteps[0];
+		gravelFootsteps[0] = fsAudio.clip;
 	}
 
 	[PunRPC]

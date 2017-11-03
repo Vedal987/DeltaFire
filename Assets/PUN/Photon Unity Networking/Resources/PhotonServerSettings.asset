@@ -44,4 +44,5 @@ MonoBehaviour:
   - BulletHoleInst
   - Kill
   - HealthRegen
+  - FootstepCycle
   DisableAutoOpenWizard: 1
